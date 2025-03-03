@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LeafQuest{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>LeafQuest</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Child templates will override this -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 LeafQuest</p>
+    </footer>
+</body>
+</html>
