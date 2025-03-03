@@ -1,0 +1,41 @@
+
+.navbar-custom {
+    background-color: #23bf48;
+}
+.sidebar-custom {
+    background-color: #b8ff93;
+}
+
+.navbar-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.profile-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #6c757d;
+    background-color: transparent;
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.profile-btn:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.inline-icon {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+footer p {
+    text-align: center;
+}
