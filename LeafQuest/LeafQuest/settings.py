@@ -30,8 +30,10 @@ SECRET_KEY = 'django-insecure-j^ai^3tq@ddx7t47&v*nzue#+c+6(8ud)tbiil8u58g*3to7+u
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'app-tlopez-5.devedu.io',
+    '*',
 ]
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

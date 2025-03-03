@@ -1,14 +1,13 @@
 asgiref==3.7.2
 Django==4.2.11
 djangorestframework==3.15.2
-gyp==0.1
-iniconfig==2.0.0
-packaging==24.2
-pluggy==1.5.0
+iniconfig==2.0.0  # This is most likely not required
+packaging==24.2  # most likely not required
+pluggy==1.5.0  # pytest dependency
 pytest==8.3.5
-pytz==2024.1
-setuptools==68.1.2
-six==1.16.0
+pytz==2024.1  # timezone reference, probably will be useful
+setuptools==68.1.2  # hastings probably included this for CI/CD purposes
+six==1.16.0  #python 2 & python 3 compat library, probably not needed, we should look into this
 sqlparse==0.4.4
 supervisor==4.2.5
 wheel==0.42.0
