@@ -1,0 +1,26 @@
+from openai import OpenAI
+import os
+
+# Read diff
+with open("diff.txt", "r") as file:
+    diff = file.read()
+
+# Query ChatGPT
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+)
+chat_completion = client.chat.completions.create(
+    messages=[
+        {"role": "system","content": "You are an expert software engineer performing a code review on a Django project. Provide concise, actionable feedback."},
+        {"role": "user", "content": f"Please review the following code changes and provide feedback:\n{diff}"}
+    ],
+    model="o3-mini"
+)
+
+feedback = chat_completion.choices[0].message.content
+print(feedback)
+
+with open("feedback.md", "w") as file:
+    file.write(f"## AI Code Review Feedback\n{feedback}")
+
+
