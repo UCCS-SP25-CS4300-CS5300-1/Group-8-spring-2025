@@ -26,11 +26,14 @@ jobs:
       - name: Run AI Review
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ github.repository }}
-          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           python ai-code-review.py
 
+      - name: Upload Review Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-code-review
+          path: feedback.md
+
       - name: Cleanup
-        run: rm diff.txt
+        run: rm diff.txt feedback.md

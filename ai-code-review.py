@@ -1,11 +1,5 @@
 from openai import OpenAI
-from github import Github
 import os
-
-# Load secrets
-github_token = os.getenv("GITHUB_TOKEN")
-repo_name = os.getenv("GITHUB_REPO")
-pr_number = int(os.getenv("GITHUB_PR_NUMBER"))
 
 # Read diff
 with open("diff.txt", "r") as file:
@@ -22,12 +16,11 @@ chat_completion = client.chat.completions.create(
     ],
     model="gpt-4"
 )
-print(type(chat_completion))
+
 feedback = chat_completion.choices[0].message.content
 print(feedback)
 
-# Post review as comment
-g = Github(github_token)
-repo = g.get_repo(repo_name)
-pr = repo.get_pull(pr_number)
-pr.create_issue_comment(f"### AI Code Review Feedback\n{feedback}")
+with open("feedback.md", "w") as file:
+    file.write(f"## AI Code Review Feedback\n{feedback}")
+
+
