@@ -29,7 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python ai-code-review.py
-        shell: python
 
       - name: Cleanup
         run: rm diff.txt
