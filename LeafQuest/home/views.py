@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from .forms import *
-from django.contrib import messages
-from django.views import generic
 
 # Create your views here.
 def home_view(request):
