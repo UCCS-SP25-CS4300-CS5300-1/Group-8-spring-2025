@@ -3,6 +3,11 @@ __pycache__
 *.pyc
 *.sqlite3
 .coverage
+.env
 
 # Don't track pycharm files
 .idea
+
+# AI Code review testing artifacts
+diff.txt
+feedback.md

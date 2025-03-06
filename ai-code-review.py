@@ -14,7 +14,7 @@ chat_completion = client.chat.completions.create(
         {"role": "system","content": "You are an expert software engineer performing a code review on a Django project. Provide concise, actionable feedback."},
         {"role": "user", "content": f"Please review the following code changes and provide feedback:\n{diff}"}
     ],
-    model="gpt-4"
+    model="o3-mini"
 )
 
 feedback = chat_completion.choices[0].message.content
