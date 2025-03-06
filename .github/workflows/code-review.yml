@@ -1,0 +1,44 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ai_code_review:
+    name: AI Code Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get all files
+        id: all-files
+        run: |
+          echo "ALL_FILES=$(git ls-files)" >> $GITHUB_ENV
+
+      - name: Generate review report
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "Generating AI review report..." > ai_review_report.txt
+          for file in $ALL_FILES; do
+            echo "Reviewing $file..." >> ai_review_report.txt
+            content=$(cat "$file" | head -c 5000) # Limit to 5000 chars to avoid API limit
+            response=$(curl -s https://api.openai.com/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -d '{
+                "model": "gpt-4",
+                "messages": [{"role": "system", "content": "You are a helpful AI code reviewer. Identify issues in code quality, security, and best practices for this Django project."},
+                              {"role": "user", "content": "Review the following code and provide feedback:\n\n" + "```" + content + "```"}]
+              }')
+            echo "$file:\n---\n\n$response\n\n" >> Report.md
+          done
+
+      - name: Upload review report
+        uses: actions/upload-artifact@v3
+        with:
+          name: AI_Code_Review_Report
+          path: ai_review_report.txt
