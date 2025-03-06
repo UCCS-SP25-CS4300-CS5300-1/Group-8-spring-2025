@@ -4,8 +4,8 @@ import os
 
 # Load secrets
 github_token = os.getenv("GITHUB_TOKEN")
-repo_name = "${{ github.repository }}"
-pr_number = int("${{ github.event.pull_request.number }}")
+repo_name = os.getenv("GITHUB_REPO")
+pr_number = os.getenv("GITHUB_PR_NUMBER")
 
 # Read diff
 with open("diff.txt", "r") as file:
