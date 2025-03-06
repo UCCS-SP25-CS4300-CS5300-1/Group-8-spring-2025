@@ -20,15 +20,20 @@ jobs:
 
       - name: Get PR Diff
         run: |
+          git fetch
           git diff origin/${{ github.event.pull_request.base.ref }} > diff.txt
 
       - name: Run AI Review
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python ai-code-review.py
-        shell: python
+
+      - name: Upload Review Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-code-review
+          path: feedback.md
 
       - name: Cleanup
-        run: rm diff.txt
+        run: rm diff.txt feedback.md
