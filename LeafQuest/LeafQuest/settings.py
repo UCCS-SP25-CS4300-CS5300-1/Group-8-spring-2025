@@ -33,6 +33,9 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://app-zmiddlet-5.devedu.io',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
