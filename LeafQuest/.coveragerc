@@ -1,0 +1,6 @@
+[run]
+omit =
+    # Omit Django API files
+    LeafQuest/asgi.py
+    LeafQuest/wsgi.py
+    manage.py
