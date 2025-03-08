@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import *
 from django.contrib import messages
+from django.views import generic
 
 # Create your views here.
 def home_view(request):
@@ -32,7 +33,7 @@ def logout_view(request):
 
 def about_view(request):
     return render(request, 'about/index.html')
-    
+
 # user registration page
 def registerPage(request):
       form = CreateUserForm()
@@ -50,3 +51,19 @@ def registerPage(request):
        
       context = {'form': form}
       return render(request, 'registration/register.html', context)
+
+def userPage(request):
+       profile = request.user.profile
+       form = ProfileForm(instance = profile)
+       print('profile', profile)
+
+       if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES, instance=profile)
+            if form.is_valid():
+                  form.save()
+       context = {'form': form}
+       return render(request, 'user.html', context)
+
+class ProfileDetailView(generic.DetailView):
+    model = Profile
+    template_name = 'profile/profile_detail.html'
