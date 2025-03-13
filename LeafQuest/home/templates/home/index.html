@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - LeafQuest{% endblock %}
 
 {% block content %}
     <h2>
-        <img src="static/images/leaf_icons.jpg" alt="LeafQuest Icon" width="100">
+        <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
         Welcome to LeafQuest!
-        <img src="static/images/leaf_icons.jpg" alt="LeafQuest Icon" width="100">
+        <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
     </h2>
     <p>Get out there and get questin'!</p>
 {% endblock %}
