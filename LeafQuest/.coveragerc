@@ -3,4 +3,5 @@ omit =
     # Omit Django API files
     LeafQuest/asgi.py
     LeafQuest/wsgi.py
+    LeafQuest/settings.py
     manage.py
