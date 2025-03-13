@@ -28,7 +28,7 @@ jobs:
     - name: Run Tests
       run: |
         cd LeafQuest
-        sed -i 's/DEBUG = True/DEBUG = False/' LeafQuest/LeafQuest/settings.py
+        sed -i 's/DEBUG = True/DEBUG = False/' LeafQuest/settings.py
         coverage run --source='.' manage.py test
         coverage report --fail-under=80
       
