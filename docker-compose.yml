@@ -1,0 +1,7 @@
+name: leafquest
+services:
+  server:
+    container_name: leafquest
+    ports:
+      - 8001:8000
+    image: leafquest:latest
