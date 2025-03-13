@@ -4,4 +4,4 @@ services:
     container_name: leafquest
     ports:
       - 8001:8000
-    image: leafquest:latest
+    image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
