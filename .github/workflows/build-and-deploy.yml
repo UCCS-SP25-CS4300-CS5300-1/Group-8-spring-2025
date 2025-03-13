@@ -1,7 +1,7 @@
 name: Build Docker and Deploy
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'deployment-fixes']
 
 jobs:
   build-and-push:
@@ -29,6 +29,22 @@ jobs:
       - name: Build
         run: |
           docker build -t ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest .
+
+      - name: Test Package
+        run: |
+          docker run -d -p 8000:8000 ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+          sleep 10
+          if curl -f http://localhost:8000; then
+            echo "Homepage test passed"
+          else
+            echo "Homepage test failed" && exit 1
+          fi
+          
+          if curl -f http://localhost:8000/static/css/style.css; then
+            echo "Staticfiles test passed"
+          else
+            echo "Staticfiles test failed" && exit 1
+          fi
 
       - name: Push Package
         run: |
