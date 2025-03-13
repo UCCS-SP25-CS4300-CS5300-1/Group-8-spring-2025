@@ -1,7 +1,7 @@
 name: Build Docker and Deploy
 on:
   push:
-    branches: ['main', 'deployment-fixes']
+    branches: ['main']
 
 jobs:
   build-and-push:
@@ -23,13 +23,13 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: wycre
           password: ${{ secrets.PACKAGES_PAT }}
 
       - name: Build
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/leafquest:latest .
+          docker build -t ghcr.io/wycre/leafquest:latest .
 
       - name: Push Package
         run: |
-          docker push ghcr.io/${{ github.repository }}/leafquest:latest
+          docker push ghcr.io/wycre/leafquest:latest
