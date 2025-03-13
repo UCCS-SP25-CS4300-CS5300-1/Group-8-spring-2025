@@ -23,13 +23,13 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: uccs-SP25-cs4300-cs5300-1
+          username: uccs-sp25-cs4300-cs5300-1
           password: ${{ secrets.PACKAGES_PAT }}
 
       - name: Build
         run: |
-          docker build -t ghcr.io/uccs-SP25-cs4300-cs5300-1/leafquest:latest .
+          docker build -t ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest .
 
       - name: Push Package
         run: |
-          docker push ghcr.io/uccs-SP25-cs4300-cs5300-1/leafquest:latest
+          docker push ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
