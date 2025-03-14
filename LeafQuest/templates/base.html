@@ -32,49 +32,49 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     {% url 'home' as home_url %}
-                    <a {% if request.get_full_path == home_url %}{% else %}href="{{ home_url }}"{% endif %}>
+                    <a {% if request.path == home_url %}{% else %}href="{{ home_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">home</span>Home
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'capture' as capture_url %}
-                    <a {% if request.get_full_path == capture_url %}{% else %}href="{{ capture_url }}"{% endif %}>
+                    <a {% if request.path == capture_url %}{% else %}href="{{ capture_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">psychiatry</span>Capture
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'plantdex' as plantdex_url %}
-                    <a {% if request.get_full_path == plantdex_url %}{% else %}href="{{ plantdex_url }}"{% endif %}>
+                    <a {% if request.path == plantdex_url %}{% else %}href="{{ plantdex_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">yard</span>PlantDex
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'badges' as badges_url %}
-                    <a {% if request.get_full_path == badges_url %}{% else %}href="{{ badges_url }}"{% endif %}>
+                    <a {% if request.path == badges_url %}{% else %}href="{{ badges_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">award_star</span>Badges
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'map' as map_url %}
-                    <a {% if request.get_full_path == map_url %}{% else %}href="{{ map_url }}"{% endif %}>
+                    <a {% if request.path == map_url %}{% else %}href="{{ map_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">globe_location_pin</span>Map
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'social' as social_url %}
-                    <a {% if request.get_full_path == social_url %}{% else %}href="{{ social_url }}"{% endif %}>
+                    <a {% if request.path == social_url %}{% else %}href="{{ social_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">groups</span>Social
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'profile' as profile_url %}
-                    <a {% if request.get_full_path == profile_url %}{% else %}href="{{ profile_url }}"{% endif %}>
+                    <a {% if request.path == profile_url %}{% else %}href="{{ profile_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">account_circle</span>Profile
                     </a>
                 </li>
                 <li class="list-group-item">
                     {% url 'settings' as settings_url %}
-                    <a {% if request.get_full_path == settings_url %}{% else %}href="{{ settings_url }}"{% endif %}>
+                    <a {% if request.path == settings_url %}{% else %}href="{{ settings_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">settings</span>Settings
                     </a>
                 </li>
@@ -85,7 +85,7 @@
                 </li>
                 <li class="list-group-item">
                     {% url 'about' as about_url %}
-                    <a {% if request.get_full_path == about_url %}{% else %}href="{{ about_url }}"{% endif %}>
+                    <a {% if request.path == about_url %}{% else %}href="{{ about_url }}"{% endif %}>
                         <span class="material-symbols-outlined me-2 inline-icon">info</span>About
                     </a>
                 </li>
