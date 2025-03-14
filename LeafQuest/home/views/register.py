@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from home.forms import CreateUserForm
 from django.contrib import messages
-from home.models import Profile
+from home.models import Profile, FriendList
 
 # user registration page
 def register_view(request):

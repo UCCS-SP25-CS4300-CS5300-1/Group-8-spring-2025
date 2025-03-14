@@ -1,5 +1,5 @@
 from .home import home_view
-from .profile import profile_view
+from .profile import *
 from .capture import capture_view
 from .plantdex import plantdex_view
 from .badges import badges_view

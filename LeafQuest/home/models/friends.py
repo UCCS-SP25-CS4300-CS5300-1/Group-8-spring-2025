@@ -17,6 +17,7 @@ class FriendList(models.Model):
         # remove friend if friend is added
         if friend in self.friends.all():
             self.friends.remove(friend)
+            self.save()
 
 # friend request from one user to another
 class FriendRequest(models.Model):
@@ -42,15 +43,18 @@ class FriendRequest(models.Model):
         # request is no longer pending
         self.pending = False
         self.save()
+        self.delete()
 
     # decline friend request (receiver side)
     def decline(self):
         # set pending field to false to denote that request is declined
         self.pending = False
         self.save()
+        self.delete()
 
     # cancel friend request (sender side)
     def cancel(self):
         # set pending field to false to denote that request is cancelled
         self.pending = False
         self.save()
+        self.delete()
