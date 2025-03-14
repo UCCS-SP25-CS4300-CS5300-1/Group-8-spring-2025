@@ -10,7 +10,7 @@ class Profile(models.Model):
 
     # more readable name for model
     def __str__(self):
-        return self.name + '(' + self.user.username + ')'
+        return self.user.username + ' (' + self.name + ')'
 
 # friend list for a given user
 class FriendList(models.Model):
@@ -49,6 +49,10 @@ class FriendRequest(models.Model):
         if sender_friends and receiver_friends:
             sender_friends.add_friend(self.receiver)
             receiver_friends.add_friend(self.sender)
+
+        # request is no longer pending
+        self.pending = False
+        self.save()
 
     # decline friend request (receiver side)
     def decline(self):
