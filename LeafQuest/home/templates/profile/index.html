@@ -1,9 +1,33 @@
+{% extends 'base.html' %}
 
-{% extends "base.html" %}
-
-{% block title %}Profile - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2>Grass Ketchum</h2>
-    <p><span class="material-symbols-outlined">psychiatry</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<h1>{{ profile.user.username }}</h1>
+
+{% if profile.user == user %}
+<div>
+    <a class="btn btn-primary" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+</div>
+{% endif %}
+
+<img src="/images/{{ profile.pfp }}", width="250", height="250">
+<p><strong>Name:</strong> {{ profile.name }}</p>
+<p><strong>About:</strong> {{ profile.aboutMe }}</p>
+
+{% if profile.user != user %}
+{% if not sentReq %}
+
+<a class="btn btn-primary" href="{% url 'add_friend' profile.id %}" role="button">Send Friend Request</a>
+
+{% else %}
+
+<a class="btn btn-danger" href="" role="button">Cancel Friend Request</a>
+
+{% endif %}
+{% else %}
+
+<a class="btn btn-primary" href="{% url 'friend_list' %}" role="button">View Friends</a>
+
+{% endif %}
+
 {% endblock %}

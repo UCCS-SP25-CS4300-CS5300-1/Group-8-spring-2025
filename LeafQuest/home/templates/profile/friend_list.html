@@ -24,7 +24,7 @@
     <ul class="list-group">
         {% for friend in friends %}
         <li class="list-group-item">
-            <p><strong>{{ friend }}</strong> <a class="btn btn-primary" href="{% url 'profile_detail' friend.id %}" role="button">View Profile</a></p>
+            <p><strong>{{ friend }}</strong> <a class="btn btn-primary" href="{% url 'profile' friend.id %}" role="button">View Profile</a></p>
         </li>
         {% endfor %}
     </ul>
