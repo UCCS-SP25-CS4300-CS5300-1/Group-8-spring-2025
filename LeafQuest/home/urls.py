@@ -25,10 +25,5 @@ urlpatterns = [
     path('social', social_view, name="social"),
     path('settings', settings_view, name="settings"),
     path('logout', logout_view, name="logout"),
-    path('about', about_view, name="about"),
-
-    # account management
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/register/', register_view, name='register'),
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this allows uploaded images to load correctly
+    path('about', about_view, name="about")
+]
