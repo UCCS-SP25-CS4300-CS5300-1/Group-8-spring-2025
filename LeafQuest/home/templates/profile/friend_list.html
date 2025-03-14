@@ -9,7 +9,7 @@
         {% if request.receiver == user.profile and request.pending %}
         <li class="list-group-item">
             <p><strong>{{ request.sender }}</strong> wants to be friends</p>
-            <a class="btn btn-primary" href="{% url 'accept_req' request.id %}" role="button">Accept</a>
+            <a class="btn btn-success" href="{% url 'accept_req' request.id %}" role="button">Accept</a>
             <a class="btn btn-danger" href="{% url 'decline_req' request.id %}" role="button">Decline</a>
         </li>
         {% endif %}
@@ -24,7 +24,7 @@
     <ul class="list-group">
         {% for friend in friends %}
         <li class="list-group-item">
-            <p><strong>{{ friend }}</strong> <a class="btn btn-primary" href="{% url 'profile' friend.id %}" role="button">View Profile</a></p>
+            <p><strong>{{ friend }}</strong> <a class="btn btn-success" href="{% url 'profile' friend.id %}" role="button">View Profile</a></p>
         </li>
         {% endfor %}
     </ul>

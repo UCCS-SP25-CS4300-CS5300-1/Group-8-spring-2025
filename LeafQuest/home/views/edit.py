@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from home.forms import ProfileForm
+from django.contrib.auth.decorators import login_required
 
 # profile editing
+@login_required
 def edit_profile(request):
     profile = request.user.profile
     form = ProfileForm(instance = profile)
-    print('profile', profile)
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)

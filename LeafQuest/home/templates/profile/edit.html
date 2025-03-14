@@ -10,6 +10,10 @@
 <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
-    <input class="btn btn-primary" type="submit" name="Update">
+    <input class="btn btn-success" type="submit" name="Update">
 </form>
+
+<a class="btn btn-success" href="{% url 'profile_view' user.profile.id %}" role="button">Back To Profile</a>
+
+
 {% endblock %}
