@@ -18,8 +18,15 @@ urlpatterns = [
     # account management
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', registerPage, name='register_page'),
-    path('accounts/profile/', userPage, name='user-page'),
 
-    path('users/<int:pk>', ProfileDetailView.as_view(), name= 'profile_detail'),
+    path('profile/', userPage, name='user_page'),
+    path('profile/friends', friend_list, name='friend_list'),
+    path('profile/friends/accept/<int:request_id>', accept_req, name='accept_req'),
+    path('profile/friends/decline/<int:request_id>', decline_req, name='decline_req'),
+
+    path('users/<int:profile_id>', profile_detail, name= 'profile_detail'),
+    path('users/<int:profile_id>/add', add_friend, name='add_friend'),
+    path('users/<int:profile_id>/cancel', cancel_friend, name='cancel_friend'),
+    #path('users/<int:profile_id>/remove', remove_friend, name='remove_friend'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this allows uploaded images to load correctly
