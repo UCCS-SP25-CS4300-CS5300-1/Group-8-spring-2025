@@ -39,3 +39,8 @@
 footer p {
     text-align: center;
 }
+
+body {
+    background-color: #ded0c1c4;
+    color: rgb(80, 168, 99)
+}
