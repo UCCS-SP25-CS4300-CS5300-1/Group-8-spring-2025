@@ -12,6 +12,3 @@ class Profile(models.Model):
     # more readable name for model
     def __str__(self):
         return self.user.username + ' (' + self.name + ')'
-
-    def get_absolute_url(self):
-        return reverse('profile', args=[str(self.id)])
