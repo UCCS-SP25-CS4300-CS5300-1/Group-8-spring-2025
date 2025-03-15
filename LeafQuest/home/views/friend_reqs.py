@@ -11,10 +11,11 @@ def add_friend(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
     req, created = FriendRequest.objects.get_or_create(sender=request.user.profile, receiver=profile, pending=True)
 
-    if created:
-        messages.success(request, 'Sent a friend request to ' + profile.user.username)
-    else: 
-        messages.error(request, 'You already sent a friend request to this user')
+    if profile != request.user.profile:
+        if created:
+            messages.success(request, 'Sent a friend request to ' + profile.user.username)
+        else: 
+            messages.error(request, 'You already sent a friend request to this user')
 
     return(redirect('profile_view', profile_id))
 
