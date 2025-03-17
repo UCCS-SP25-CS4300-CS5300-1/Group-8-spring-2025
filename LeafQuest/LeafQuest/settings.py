@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://app-zmiddlet-5.devedu.io',
+    # '*' doesn't work for this so add necessary origins here
 ]
 
 REST_FRAMEWORK = {
@@ -132,7 +133,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'home/static/images')
 MEDIA_URL = '/images/'
 
 # Static files (CSS, JavaScript, Images)
@@ -142,6 +143,9 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STORAGES = {
+    "default": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
