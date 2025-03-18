@@ -11,9 +11,9 @@ def register_view(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            login(form.save())
+            user = form.save()
             username = form.cleaned_data.get('username')
-            profile = Profile.objects.create(user=user,)
+            profile = Profile.objects.create(user=user)
             profile.save()
             friendlist = FriendList.objects.create(profile=profile)
 

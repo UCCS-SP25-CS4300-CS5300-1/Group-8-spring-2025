@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from home.models import Profile, FriendList, FriendRequest
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def profile_view(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
@@ -22,6 +23,7 @@ def profile_view(request, profile_id):
 
     context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend}
     return render(request, 'profile/index.html', context)
+
 
 # redirects user to thier profile (for use with "Profile" button in the menu)
 @login_required

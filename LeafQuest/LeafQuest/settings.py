@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://app-zmiddlet-5.devedu.io',
-    # '*' doesn't work for this so add necessary origins here
+    os.environ.get('DJANGO_ALLOWED_HOSTS', 'http://localhost')
 ]
 
 REST_FRAMEWORK = {
