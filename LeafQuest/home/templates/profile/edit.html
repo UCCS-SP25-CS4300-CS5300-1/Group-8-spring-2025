@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<!--Form for users to update account information-->
+
+{% block content %}
+<h1>Welcome, {{user}}! </h1>
+
+<h3>Account Information</h3>
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn btn-success" type="submit" name="Update">
+</form>
+
+<a class="btn btn-success" href="{% url 'profile_view' user.profile.id %}" role="button">Back To Profile</a>
+
+
+{% endblock %}
