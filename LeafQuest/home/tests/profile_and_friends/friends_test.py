@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from home.models import *
+from ...models import *
 from django.contrib.auth.models import User
-from home.views import *
+from ...views import *
 
 class FriendTest(TestCase):
     def setUp(self):

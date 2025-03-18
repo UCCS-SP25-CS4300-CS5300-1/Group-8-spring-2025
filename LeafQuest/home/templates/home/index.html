@@ -4,10 +4,25 @@
 {% block title %}Home - LeafQuest{% endblock %}
 
 {% block content %}
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+
+    {% if user.is_authenicated %}
+    <h2>
+        <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
+        Welcome to LeafQuest, {{ user.username }}!
+        <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
+    </h2>
+    <p>Get out there and get questin'!</p>
+
+    {% else %}
+
     <h2>
         <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
         Welcome to LeafQuest!
         <img src="{% static "images/leaf_icons.jpg" %}" alt="LeafQuest Icon" width="100">
     </h2>
     <p>Get out there and get questin'!</p>
+    {% endif %}
 {% endblock %}

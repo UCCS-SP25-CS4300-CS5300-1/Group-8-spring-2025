@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib import messages
-from home.models import Profile, FriendList, FriendRequest
+from ..models import Profile, FriendList, FriendRequest
 
 '''
 Views to handle friend request management

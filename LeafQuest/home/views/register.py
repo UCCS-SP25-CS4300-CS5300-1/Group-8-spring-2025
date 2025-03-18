@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from home.forms import CreateUserForm
+from ..forms import CreateUserForm
 from django.contrib import messages
-from home.models import Profile, FriendList
+from ..models import Profile, FriendList
+from django.contrib.auth import login
 
 # user registration page
 def register_view(request):
@@ -10,7 +11,7 @@ def register_view(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            login(form.save())
             username = form.cleaned_data.get('username')
             profile = Profile.objects.create(user=user,)
             profile.save()

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from home.forms import ProfileForm
+from ..forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 
 # profile editing

@@ -28,8 +28,9 @@ urlpatterns = [
     path('logout', logout_view, name="logout"),
     path('about', about_view, name="about"),
 
-    # django account management
-    path('accounts/', include('django.contrib.auth.urls')),
+    # account management
     path('accounts/register/', register_view, name='register'),
+    path('accounts/login/', login_view, name='login'),
+    path('accounts/logout/', logout_view, name='logout'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this allows uploaded images to load correctly

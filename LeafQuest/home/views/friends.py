@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from home.models import FriendList, FriendRequest
+from ..models import FriendList, FriendRequest
 from django.contrib.auth.decorators import login_required
 
 @login_required

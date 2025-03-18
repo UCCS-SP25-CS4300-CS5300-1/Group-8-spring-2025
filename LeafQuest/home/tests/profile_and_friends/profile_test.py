@@ -1,7 +1,7 @@
 from django.test import TestCase
-from home.models import Profile
+from ...models import Profile
 from django.contrib.auth.models import User
-from home.views import *
+from ...views import *
 
 class ProfileTest(TestCase):
     def setUp(self):
