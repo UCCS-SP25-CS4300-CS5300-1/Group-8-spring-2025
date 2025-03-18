@@ -2,8 +2,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('api/', home_view, name="api"),
+    path('api/', home_view, name="api_home"),
     path('', home_view, name="home"),
+    path('api/profile', profile_view, name="api_profile"),
     path('profile', profile_view, name="profile"),
     path('capture', capture_view, name="capture"),
     path('plantdex', plantdex_view, name="plantdex"),
