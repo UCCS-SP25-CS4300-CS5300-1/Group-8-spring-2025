@@ -1,6 +1,7 @@
 from django.db import models
 from .profile import Profile
 
+
 # friend list for a given user
 class FriendList(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
@@ -19,6 +20,7 @@ class FriendList(models.Model):
             self.friends.remove(friend)
             self.save()
 
+
 # friend request from one user to another
 class FriendRequest(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
@@ -28,7 +30,7 @@ class FriendRequest(models.Model):
 
     # more readable name for model
     def __str__(self):
-        return self.sender.name + ' -> ' + self.reveiver.name
+        return self.sender.name + ' -> ' + self.receiver.name
     
     # accept a friend request
     def accept(self):
