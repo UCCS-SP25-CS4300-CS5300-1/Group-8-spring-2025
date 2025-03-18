@@ -8,6 +8,9 @@ services:
       - 8001:8000
     environment:
       - 'DJANGO_ALLOWED_HOSTS=https://leafquest.wycre.net'
+    volumes:
+      - /sdat/leafquest/db.sqlite3:/app/db.sqlite3
+      - /sdat/leafquest/media:/app/home/media
     restart: unless-stopped
     image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
 
