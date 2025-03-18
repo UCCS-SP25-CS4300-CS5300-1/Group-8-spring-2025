@@ -21,4 +21,5 @@ def about_view(request):
         'description': project_description,
         'github_link': github_link,
         'developers': developers,
+        'version': '1.0.0',
     })

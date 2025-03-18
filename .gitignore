@@ -5,6 +5,12 @@ __pycache__
 .coverage
 .env
 
+# Collectstatic for deployment
+LeafQuest/staticfiles
+
+# Files uploaded by users
+LeafQuest/home/media
+
 # Don't track pycharm files
 .idea
 
