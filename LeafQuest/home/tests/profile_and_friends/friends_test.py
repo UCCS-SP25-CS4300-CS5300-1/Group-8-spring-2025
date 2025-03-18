@@ -4,10 +4,11 @@ from ...models import *
 from django.contrib.auth.models import User
 from ...views import *
 
+
 class FriendTest(TestCase):
     def setUp(self):
-        self.user1 = User.objects.create(username='testuser', email='test@test.test', password='t3st1ng')
-        self.user2 = User.objects.create(username='testing', email='test2@test.test', password='t3st1ng')
+        self.user1 = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
+        self.user2 = User.objects.create_user(username='testing', email='test2@test.test', password='t3st1ng')
         self.profile1 = Profile.objects.create(user=self.user1, name='Test User', aboutMe='Hello World')
         self.profile2 = Profile.objects.create(user=self.user2, name='Testing', aboutMe='Hello World')
         self.friendList1 = FriendList.objects.create(profile=self.profile1)

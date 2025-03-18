@@ -3,9 +3,10 @@ from ...models import Profile
 from django.contrib.auth.models import User
 from ...views import *
 
+
 class ProfileTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='testuser', email='test@test.test', password='t3st1ng')
+        self.user = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
         self.client.user = self.user
         self.client.force_login(self.user)
         self.profile = Profile.objects.create(user=self.user, name='Testing', aboutMe='Hello World', pfp='images/profile/defaultprofile.png')

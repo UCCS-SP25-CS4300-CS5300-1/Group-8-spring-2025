@@ -9,7 +9,7 @@ class ViewTests(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = User.objects.create(username='testuser', email='test@test.test', password='t3st1ng')
+        self.user = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
         self.client.login(username='testuser', password='t3st1ng')
         self.profile = Profile.objects.create(user=self.user, name='Testing', aboutMe='Hello World')
 
