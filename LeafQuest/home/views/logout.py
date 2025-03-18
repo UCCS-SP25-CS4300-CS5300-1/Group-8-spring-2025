@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.contrib import messages
 
 def logout_view(request):
-    # TODO: perform logout action, then show LOGIN screen. No need for a logout template
-    return render(request, 'logout/index.html')
+    logout(request)
+    messages.success(request, 'Logged Out!')
+    return redirect('login')
