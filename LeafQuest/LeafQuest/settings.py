@@ -85,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -134,7 +135,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = BASE_DIR / 'home/media'
+MEDIA_ROOT = BASE_DIR / 'home' / 'media'
 MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
@@ -146,6 +147,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
+
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",

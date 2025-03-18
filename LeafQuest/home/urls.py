@@ -1,9 +1,14 @@
-from django.urls import include, path
+import django
+from django.urls import include, path, re_path
 from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+
+    re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {
+        'document_root': settings.MEDIA_ROOT,  # Evil ugly garbage, thanks lazy Django devs
+    }),
 
     path('', home_view, name="home"),
     path('capture', capture_view, name="capture"),
