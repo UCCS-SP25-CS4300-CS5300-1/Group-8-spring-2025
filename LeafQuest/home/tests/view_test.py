@@ -34,7 +34,11 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_badges_view(self):
-        response = badges_view(self.factory.get('/badges/'))
+        request = self.factory.get('/badges/')
+        request.session = {}
+        request.user = self.user
+
+        response = badges_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_map_view(self):

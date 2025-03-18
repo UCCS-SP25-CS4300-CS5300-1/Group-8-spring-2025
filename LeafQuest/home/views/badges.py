@@ -6,7 +6,7 @@ def badges_view(request):
     
     # Check if the user is authenticated
     if request.user.is_authenticated:
-        user_badges = request.user.badge_set.all()
+        user_badges = Badge.objects.filter(user=request.user).order_by('pk')
     else:
         user_badges = None  # Handle anonymous users
     
