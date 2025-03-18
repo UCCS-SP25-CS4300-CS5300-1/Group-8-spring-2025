@@ -4,13 +4,17 @@
 {% block content %}
 <h1>{{ profile.user.username }}</h1>
 
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+
 {% if profile.user == user %}
 <div>
     <a class="btn btn-success" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
 </div>
 {% endif %}
 
-<img src="/images/{{ profile.pfp }}", width="250", height="250">
+<img src="/media/{{ profile.pfp }}", width="250", height="250">
 <p><strong>Name:</strong> {{ profile.name }}</p>
 <p><strong>About:</strong> {{ profile.aboutMe }}</p>
 

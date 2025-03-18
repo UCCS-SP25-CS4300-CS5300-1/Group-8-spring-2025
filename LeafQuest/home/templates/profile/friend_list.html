@@ -2,6 +2,11 @@
 
 
 {% block content %}
+
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+
 <h3>Pending Requests</h3>
 {% if requests %}
     <ul class="list-group">
