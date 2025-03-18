@@ -4,9 +4,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    # API routes
-    path('api/', home_view, name="api_home"),
-    path('api/profile', profile_view, name="api_profile"),
 
     path('', home_view, name="home"),
     path('capture', capture_view, name="capture"),
