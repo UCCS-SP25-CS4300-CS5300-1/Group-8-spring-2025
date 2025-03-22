@@ -1,12 +1,14 @@
 from django.shortcuts import redirect
 from django.contrib import messages
 from ..models import Profile, FriendList, FriendRequest
+from django.contrib.auth.decorators import login_required
+
 
 '''
 Views to handle friend request management
 '''
-
 # create a friend request
+@login_required
 def add_friend(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
     req, created = FriendRequest.objects.get_or_create(sender=request.user.profile, receiver=profile, pending=True)

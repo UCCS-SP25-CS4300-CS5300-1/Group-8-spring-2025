@@ -26,6 +26,13 @@
     text-decoration: none;
 }
 
+.profile-pic {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 .profile-btn:hover {
     background-color: #6c757d;
     color: white;

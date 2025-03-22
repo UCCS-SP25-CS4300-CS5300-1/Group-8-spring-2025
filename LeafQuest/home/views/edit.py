@@ -2,6 +2,7 @@ from django.shortcuts import render
 from ..forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 
+
 # profile editing
 @login_required
 def edit_profile(request):

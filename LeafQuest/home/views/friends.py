@@ -2,6 +2,7 @@ from django.shortcuts import render
 from ..models import FriendList, FriendRequest
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def friend_list(request):
     profile = request.user.profile

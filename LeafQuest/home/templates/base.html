@@ -18,8 +18,12 @@
 
         <a href="{% url 'home' %}" style="text-decoration:none; color: black;"><span class="navbar-title"><span class="material-symbols-outlined">psychiatry</span> LeafQuest</span></a>
 
-        <a href="profile" class="profile-btn">
+        <a href="{% url 'profile' %}" class="profile-btn">
+            {% if request.user.is_authenticated %}
+            <img src="/media/{{ request.user.profile.pfp }}" alt="Profile Picture" class="profile-pic">
+            {% else %}
             <span class="material-symbols-outlined">person</span>
+            {% endif %}
         </a>
     </nav>
 
