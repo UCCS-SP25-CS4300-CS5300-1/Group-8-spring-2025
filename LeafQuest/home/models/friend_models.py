@@ -1,5 +1,5 @@
 from django.db import models
-from .profile import Profile
+from .profile_model import Profile
 
 
 # friend list for a given user

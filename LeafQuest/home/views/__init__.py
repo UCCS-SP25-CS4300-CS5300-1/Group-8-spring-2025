@@ -9,7 +9,6 @@ from .settings import settings_view
 from .about import about_view
 from .logout import logout_view
 from .register import register_view
-from .edit import edit_profile
 from .friend_reqs import *
 from .friends import friend_list
 from .login import login_view
