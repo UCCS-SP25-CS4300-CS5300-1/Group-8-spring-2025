@@ -31,7 +31,7 @@
         const uploadBtn = document.getElementById('upload');
 
         // Request access to the camera
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
             .then(stream => {
                 video.srcObject = stream;
             })
