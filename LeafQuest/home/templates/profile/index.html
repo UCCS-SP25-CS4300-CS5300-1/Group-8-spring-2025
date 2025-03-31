@@ -33,6 +33,15 @@
     {% else %}
         <a class="btn btn-danger" href="{% url 'remove_friend' profile.id %}" role="button">Remove Friend</a>
     {% endif %}
+
+    {% if profile.private and not is_friend %}
+        <h2>This profile is <strong>private</strong></h2>
+        <p>Only {{profile.user.username}}'s friends can see thier pictures and badges</p>
+
+    <!--Add else statement to display pictures/badges-->
+
+    {% endif %}
+
 {% else %}
 
 <a class="btn btn-success" href="{% url 'friend_list' %}" role="button">View Friends</a>
