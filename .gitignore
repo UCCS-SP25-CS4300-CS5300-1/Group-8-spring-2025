@@ -17,3 +17,6 @@ LeafQuest/home/media
 # AI Code review testing artifacts
 diff.txt
 feedback.md
+
+# Files related to deployed server
+data/
