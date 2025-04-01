@@ -65,8 +65,3 @@ jobs:
             docker pull ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
             docker compose up -d
             docker exec leafquest python manage.py migrate
-            
-            
-
-
-
