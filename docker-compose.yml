@@ -6,8 +6,6 @@ services:
       - host-net
     ports:
       - ${PUB_PORT}:8000
-    environment:
-      - 'DJANGO_ALLOWED_HOSTS=https://leafquest.wycre.net'
     volumes:
       - ${PERSIST_DATA_LOC}/db.sqlite3:/app/db.sqlite3
       - ${PERSIST_DATA_LOC}/media:/app/home/media
