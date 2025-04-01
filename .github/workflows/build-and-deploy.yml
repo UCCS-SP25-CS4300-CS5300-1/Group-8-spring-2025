@@ -1,0 +1,51 @@
+name: Build Docker and Deploy
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.12]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log into gchr
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PACKAGES_PAT }}
+
+      - name: Build
+        run: |
+          docker build -t ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest .
+
+      - name: Test Package
+        run: |
+          docker run -d -p 8000:8000 ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+          sleep 10
+          if curl -f http://localhost:8000; then
+            echo "Homepage test passed"
+          else
+            echo "Homepage test failed" && exit 1
+          fi
+          
+          if curl -f http://localhost:8000/static/css/style.css; then
+            echo "Staticfiles test passed"
+          else
+            echo "Staticfiles test failed" && exit 1
+          fi
+
+      - name: Push Package
+        run: |
+          docker push ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest

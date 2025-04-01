@@ -1,0 +1,16 @@
+name: leafquest
+services:
+  server:
+    container_name: leafquest
+    networks:
+      - fran1-net
+    ports:
+      - 8001:8000
+    environment:
+      - 'DJANGO_ALLOWED_HOSTS=https://leafquest.wycre.net'
+    restart: unless-stopped
+    image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+
+networks:
+  fran1-net:
+    external: true

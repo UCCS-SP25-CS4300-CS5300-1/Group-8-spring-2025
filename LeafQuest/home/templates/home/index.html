@@ -1,12 +1,42 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - LeafQuest{% endblock %}
 
 {% block content %}
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
     <h2>
-        <img src="static/images/leaf_icons.jpg" alt="LeafQuest Icon" width="100">
-        Welcome to LeafQuest!
-        <img src="static/images/leaf_icons.jpg" alt="LeafQuest Icon" width="100">
+        Welcome to LeafQuest, {{ user.username }}!
     </h2>
-    <p>Get out there and get questin'!</p>
+
+    {% else %}
+
+    <h2>
+        Welcome to LeafQuest!
+    </h2>
+    {% endif %}
+
+    <h2 class="text-center pb-3">
+        Welcome to LeafQuest!
+    </h2>
+
+    <h4>PlantDex</h4>
+    <div class="container-fluid border border-dark mb-2" style="height:100px;">
+
+    </div>
+
+    <h4>Badges</h4>
+    <div class="container-fluid border border-dark mb-2" style="height:100px;">
+
+    </div>
+
+    <h4>Social</h4>
+    <div class="container-fluid border border-dark mb-2" style="height:300px;">
+
+    </div>
+
 {% endblock %}

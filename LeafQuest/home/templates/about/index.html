@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+
+{% block title %}About - LeafQuest{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">About LeafQuest</h2>
+    <p>App version: {{ version }}</p>
+    <p>{{ description }}</p>
+
+    <div class="mb-4">
+        <a href="{{ github_link }}" target="_blank" class="btn btn-outline-dark">
+            <span class="material-symbols-outlined me-2">code</span>View on GitHub
+        </a>
+    </div>
+
+    <h3 class="mb-3">Meet the Developers</h3>
+    <div class="row">
+        {% for dev in developers %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ dev.name }}</h5>
+                        <a href="{{ dev.github }}" target="_blank" class="btn btn-outline-primary">
+                            <span class="material-symbols-outlined me-1">link</span>GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
