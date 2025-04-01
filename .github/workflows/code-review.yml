@@ -3,9 +3,6 @@ name: AI Code Review
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - ci-dev
 
 jobs:
   ai_code_review:
@@ -37,6 +34,11 @@ jobs:
         with:
           name: ai-code-review
           path: feedback.md
+
+      - name: Comment Feedback on Pull Request
+        uses: thollander/actions-comment-pull-request@v3.0.1
+        with:
+          file-path: feedback.md
 
       - name: Cleanup
         run: rm diff.txt feedback.md
