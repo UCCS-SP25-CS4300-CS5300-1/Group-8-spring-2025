@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   ai_code_review:
     runs-on: ubuntu-latest
@@ -34,6 +38,16 @@ jobs:
         with:
           name: ai-code-review
           path: feedback.md
+
+      - name: Fix OpenAI silliness
+        run: |
+          sed -i 's/```markdown//' feedback.md
+          sed -i 's/```//' feedback.md
+
+      - name: Comment Feedback on Pull Request
+        uses: thollander/actions-comment-pull-request@v3.0.1
+        with:
+          file-path: feedback.md
 
       - name: Cleanup
         run: rm diff.txt feedback.md
