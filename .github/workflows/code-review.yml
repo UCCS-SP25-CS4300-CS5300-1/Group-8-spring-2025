@@ -39,11 +39,15 @@ jobs:
           name: ai-code-review
           path: feedback.md
 
+      - name: Fix OpenAI silliness
+        run: |
+          sed -i 's/```markdown//'
+          sed -i 's/```//'
+
       - name: Comment Feedback on Pull Request
         uses: thollander/actions-comment-pull-request@v3.0.1
         with:
-          message: |
-            cat feedback.md
+          file-path: feedback.md
 
       - name: Cleanup
         run: rm diff.txt feedback.md
