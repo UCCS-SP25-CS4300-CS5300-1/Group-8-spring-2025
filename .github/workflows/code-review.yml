@@ -24,7 +24,7 @@ jobs:
       - name: Get PR Diff
         run: |
           git fetch
-          git diff origin/${{ github.event.pull_request.base.ref }} > diff.txt
+          git diff origin > diff.txt
 
       - name: Run AI Review
         env:
