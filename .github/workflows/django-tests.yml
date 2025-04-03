@@ -37,4 +37,3 @@ jobs:
         cd LeafQuest
         coverage run --source='.' manage.py test
         coverage report --fail-under=80
-      
