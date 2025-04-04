@@ -15,7 +15,10 @@ urlpatterns = [
     path('plantdex', plantdex_view, name="plantdex"),
     path('badges', badges_view, name="badges"),
     path('map', map_view, name="map"),
+
     path('social', social_view, name="social"),
+    path('social/search', profile_search, name="search"),
+
 
     # profile viewing/editing and friends list
     path('profile', profile_redir, name="profile"),

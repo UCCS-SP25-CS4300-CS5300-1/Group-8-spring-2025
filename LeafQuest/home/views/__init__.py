@@ -13,3 +13,4 @@ from .edit import edit_profile
 from .friend_reqs import *
 from .friends import friend_list
 from .login import login_view
+from .search import profile_search

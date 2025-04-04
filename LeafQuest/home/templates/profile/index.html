@@ -12,26 +12,13 @@
         <div class="card-header">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img class="pfp" src="/media/{{ profile.pfp }}", width="250", height="250">
+                    <img src="/media/{{ profile.pfp }}", width="250", height="250">
                 </div>
                 <div class="col-md-8">
-                    <h1>{{ profile.user.username }}</h1>
+                    <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
                     <h3>{{ profile.name }}</h3>
-                </div>
-            </div>
-            {% if profile.user == user %}
-            <div>
-                <a style="margin-top: 5px;" class="btn btn-success" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
-                <a style="margin-top: 5px;" class="btn btn-success" href="{% url 'friend_list' %}" role="button">View Friends</a>
-            </div>
-            {% endif %}
-        </div>
-            <div class="card-body">
-                <h4 class="card-title">About</h4>
-                <p class="card-text">{{ profile.aboutMe }}</p>
-            
-            {% if profile.user != user %}
-                {% if not is_friend %}
+
+                    {% if not is_friend %}
                     {% if not sentReq %}
 
                     <a class="btn btn-success" href="{% url 'add_friend' profile.id %}" role="button">Send Friend Request</a>
@@ -45,17 +32,28 @@
                 {% else %}
                     <a class="btn btn-danger" href="{% url 'remove_friend' profile.id %}" role="button">Remove Friend</a>
                 {% endif %}
-
+                </div>
+            </div>
+            {% if profile.user == user %}
+            <div>
+                <a style="margin-top: 5px;" class="btn btn-success" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+                <a style="margin-top: 5px;" class="btn btn-success" href="{% url 'friend_list' %}" role="button">View Friends</a>
+            </div>
+            {% endif %}
+        </div>     
+            <div class="card-body">
+                <h4 class="card-title">About</h4>
+                <p class="card-text">{{ profile.aboutMe }}</p>
+            
                 {% if profile.private and not is_friend %}
+                    </br>
                     <h2>This profile is <strong>private</strong></h2>
                     <p>Only {{profile.user.username}}'s friends can see thier pictures and badges</p>
 
-                <!--Add else statement to display pictures/badges-->
+                     <!--Add else statement to display pictures/badges-->
 
                 {% endif %}
             </div>
 
-        {% endif %}
-    </div>
 </div>
 {% endblock %}

@@ -58,6 +58,11 @@ class ViewTests(TestCase):
         response = social_view(self.factory.get('/social/'))
         self.assertEqual(response.status_code, 200)
 
+    def test_search_view(self):
+        response = self.client.post(reverse('search'), {'search': 'test'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "testuser")
+
     def test_settings_view(self):
         response = settings_view(self.factory.get('/settings/'))
         self.assertEqual(response.status_code, 200)

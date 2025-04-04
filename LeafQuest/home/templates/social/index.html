@@ -5,10 +5,6 @@
 {% block content %}
     <h2>Social</h2>
 
-    <h3>List of Users</h3>
-    {% for profile in profiles %}
-    <li class="list-group-item">
-        <p><strong>{{ profile }}</strong> <a class="btn btn-success" href="{% url 'profile_view' profile.id %}" role="button">View Profile</a></p>
-    </li>
-    {% endfor %}
+    </br>
+    <a class="btn btn-success" href="{% url 'search' %}" role="button">Search for a User</a>
 {% endblock %}
