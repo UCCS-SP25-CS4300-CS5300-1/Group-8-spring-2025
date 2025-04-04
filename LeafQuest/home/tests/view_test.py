@@ -59,7 +59,7 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_search_view(self):
-        response = self.client.post(reverse('search'), {'search': 'test'})
+        response = self.client.get(reverse('search_results'), {'search': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "testuser")
 
