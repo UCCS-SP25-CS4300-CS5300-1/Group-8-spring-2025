@@ -17,6 +17,8 @@
                 <div class="col-md-8">
                     <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
                     <h3>{{ profile.name }}</h3>
+                    </br>
+                    <p>{{ profile.aboutMe }}</p>
 
                     {% if profile.user != user %}
                         {% if not is_friend %}
@@ -44,15 +46,22 @@
             {% endif %}
         </div>     
             <div class="card-body">
-                <h4 class="card-title">About</h4>
-                <p class="card-text">{{ profile.aboutMe }}</p>
-            
                 {% if profile.private and not is_friend %}
-                    </br>
+                    
                     <h2>This profile is <strong>private</strong></h2>
                     <p>Only {{profile.user.username}}'s friends can see thier pictures and badges</p>
 
-                     <!--Add else statement to display pictures/badges-->
+                {% else %}
+
+                    <h4>PlantDex</h4>
+                    <div class="container-fluid border border-dark mb-2" style="height:100px;">
+                
+                    </div>
+                
+                    <h4>Badges</h4>
+                    <div class="container-fluid border border-dark mb-2" style="height:100px;">
+                
+                    </div>
 
                 {% endif %}
             </div>
