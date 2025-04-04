@@ -9,7 +9,7 @@
     {% endfor %}
 
     {% if user.is_authenticated %}
-    <h2>
+    <h2 class="text-center pb-3">
         Welcome to LeafQuest, {{ user.username }}!
     </h2>
 
@@ -18,11 +18,8 @@
     <h2>
         Welcome to LeafQuest!
     </h2>
-    {% endif %}
 
-    <h2 class="text-center pb-3">
-        Welcome to LeafQuest!
-    </h2>
+    {% endif %}
 
     <h4>PlantDex</h4>
     <div class="container-fluid border border-dark mb-2" style="height:100px;">
