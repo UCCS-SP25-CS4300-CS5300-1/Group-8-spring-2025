@@ -17,8 +17,8 @@ urlpatterns = [
     path('map', map_view, name="map"),
 
     path('social', social_view, name="social"),
-    path('social/search', profile_search, name="search"),
-
+    path('social/search/', profile_search_view, name="search"),
+    path('social/search/results', profile_search, name="search_results"),
 
     # profile viewing/editing and friends list
     path('profile', profile_redir, name="profile"),

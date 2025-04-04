@@ -7,10 +7,9 @@
     <h1>Profile Search</h1>
     </br>
 
-    <form method="POST">
-    {% csrf_token %}
-    <input type="input" class="search" placeholder="Search for a Username" name="search">
-    <button type="submit" class="btn btn-success">Search</button>
+    <form method="GET" action="{% url 'search_results' %}">
+        <input type="input" class="search" placeholder="Search for a Username" name="search">
+        <button type="submit" class="btn btn-success">Search</button>
     </form>
 </div>
 </br>

@@ -38,4 +38,4 @@ class ProfileTest(TestCase):
         self.friendList2 = FriendList.objects.create(profile=self.profile2)
 
         res = self.client.get(reverse('profile_view', kwargs={"profile_id": self.user2.id}))
-        self.assertContains(res, "Only testuser2's friends can see thier pictures and badges")
+        self.assertContains(res, "Only testuser2's friends can see their pictures and badges")
