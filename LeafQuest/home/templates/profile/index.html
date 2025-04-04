@@ -18,20 +18,22 @@
                     <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
                     <h3>{{ profile.name }}</h3>
 
-                    {% if not is_friend %}
-                    {% if not sentReq %}
+                    {% if profile.user != user %}
+                        {% if not is_friend %}
+                            {% if not sentReq %}
 
-                    <a class="btn btn-success" href="{% url 'add_friend' profile.id %}" role="button">Send Friend Request</a>
+                            <a class="btn btn-success" href="{% url 'add_friend' profile.id %}" role="button">Send Friend Request</a>
 
-                    {% else %}
+                            {% else %}
 
-                    <a class="btn btn-danger" href="{% url 'cancel_friend' profile.id %}" role="button">Cancel Friend Request</a>
+                            <a class="btn btn-danger" href="{% url 'cancel_friend' profile.id %}" role="button">Cancel Friend Request</a>
 
+                            {% endif %}
+                    
+                        {% else %}
+                            <a class="btn btn-danger" href="{% url 'remove_friend' profile.id %}" role="button">Remove Friend</a>
+                        {% endif %}
                     {% endif %}
-                
-                {% else %}
-                    <a class="btn btn-danger" href="{% url 'remove_friend' profile.id %}" role="button">Remove Friend</a>
-                {% endif %}
                 </div>
             </div>
             {% if profile.user == user %}
