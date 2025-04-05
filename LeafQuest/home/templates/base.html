@@ -11,7 +11,7 @@
     <title>{% block title %}LeafQuest{% endblock %}</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-custom">
+    <nav class="navbar navbar-custom px-2">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
             <span class="material-symbols-outlined">menu</span>
         </button>
@@ -19,7 +19,11 @@
         <a href="{% url 'home' %}" style="text-decoration:none; color: black;"><span class="navbar-title"><span class="material-symbols-outlined">psychiatry</span> LeafQuest</span></a>
 
         <a href="{% url 'profile' %}" class="profile-btn">
-            <span class="material-symbols-outlined">person</span>
+            {% if request.user.is_authenticated %}
+                <img src="/media/{{ request.user.profile.pfp }}" alt="Profile Picture" class="profile-pic">
+            {% else %}
+                <span class="material-symbols-outlined">person</span>
+            {% endif %}
         </a>
     </nav>
 
@@ -100,7 +104,7 @@
         </div>
     </div>
 
-    <main class="container-fluid flex-grow-1 mt-3 p-2">
+    <main class="container flex-grow-1 mt-3 p-2">
         {% block content %} {% endblock %}
     </main>
 

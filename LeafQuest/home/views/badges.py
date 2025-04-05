@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from ..models import Badge
 
+
+@login_required
 def badges_view(request):
     all_badges = Badge.objects.all()
     
