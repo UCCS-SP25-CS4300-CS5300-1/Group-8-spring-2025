@@ -14,7 +14,9 @@ class ViewTests(TestCase):
         self.profile = Profile.objects.create(user=self.user, name='Testing', aboutMe='Hello World')
 
     def test_home_page(self):
-        res = home_view(self.factory.get(''))
+        request = self.factory.get('')
+        request.user = self.user
+        res = home_view(request)
         self.assertEqual(res.status_code, 200)
 
     def test_profile_view(self):
@@ -26,11 +28,15 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 302)  # /profile is configured to redirect
 
     def test_capture_view(self):
-        response = capture_view(self.factory.get('/capture/'))
+        request = self.factory.get('/capture/')
+        request.user = self.user
+        response = capture_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_plantdex_view(self):
-        response = plantdex_view(self.factory.get('/plantdex/'))
+        request = self.factory.get('/plantdex/')
+        request.user = self.user
+        response = plantdex_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_badges_view(self):
@@ -42,15 +48,21 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_map_view(self):
-        response = map_view(self.factory.get('/map/'))
+        request = self.factory.get('/map/')
+        request.user = self.user
+        response = map_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_social_view(self):
-        response = social_view(self.factory.get('/social/'))
+        request = self.factory.get('/social/')
+        request.user = self.user
+        response = social_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_settings_view(self):
-        response = settings_view(self.factory.get('/settings/'))
+        request = self.factory.get('/settings/')
+        request.user = self.user
+        response = settings_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_logout_view(self):
