@@ -10,7 +10,7 @@ class ProfileTest(TestCase):
         self.user = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
         self.client.user = self.user
         self.client.force_login(self.user)
-        self.profile = Profile.objects.create(user=self.user, name='Testing', aboutMe='Hello World', pfp='images/profile/defaultprofile.png')
+        self.profile = Profile.objects.create(user=self.user, name='Testing', about_me='Hello World', pfp='images/profile/defaultprofile.png')
         self.friendList = FriendList.objects.create(profile=self.profile)
 
     # test that object data is accurate
@@ -21,7 +21,7 @@ class ProfileTest(TestCase):
 
     # test that profiles can be updated via the editing form
     def test_profile_update(self):
-        data = {'name': 'New Name', 'aboutMe': 'New about me text'}
+        data = {'name': 'New Name', 'about_me': 'New about me text'}
         res = self.client.post('/profile/edit', data)
 
         # check that request was good and profile information was updated
@@ -34,7 +34,7 @@ class ProfileTest(TestCase):
     # test that private setting works
     def test_private_profile(self):
         self.user2 = User.objects.create_user(username='testuser2', email='test2@test.test', password='t3st1ng')
-        self.profile2 = Profile.objects.create(user=self.user2, name='Testing 2', aboutMe='Hello World', pfp='images/profile/defaultprofile.png', private=True)
+        self.profile2 = Profile.objects.create(user=self.user2, name='Testing 2', about_me='Hello World', pfp='images/profile/defaultprofile.png', private=True)
         self.friendList2 = FriendList.objects.create(profile=self.profile2)
 
         res = self.client.get(reverse('profile_view', kwargs={"profile_id": self.user2.id}))

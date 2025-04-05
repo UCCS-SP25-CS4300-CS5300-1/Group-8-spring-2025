@@ -11,7 +11,7 @@ class ViewTests(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
         self.client.login(username='testuser', password='t3st1ng')
-        self.profile = Profile.objects.create(user=self.user, name='Testing', aboutMe='Hello World')
+        self.profile = Profile.objects.create(user=self.user, name='Testing', about_me='Hello World')
         self.friendlist = FriendList.objects.create(profile=self.profile)
 
     def test_home_page(self):
