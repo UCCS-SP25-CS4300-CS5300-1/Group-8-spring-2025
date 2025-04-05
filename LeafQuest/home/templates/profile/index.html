@@ -18,7 +18,7 @@
                     <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
                     <h3>{{ profile.name }}</h3>
                     </br>
-                    <p>{{ profile.aboutMe }}</p>
+                    <p>{{ profile.about_me }}</p>
 
                     {% if profile.user != user %}
                         {% if not is_friend %}
