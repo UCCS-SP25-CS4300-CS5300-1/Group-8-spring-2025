@@ -9,5 +9,5 @@ def profile_search_view(request):
 def profile_search(request):
     if request.method == "GET":
         search = request.GET.get('search')
-        results = Profile.objects.filter(user__username__contains = search)
+        results = Profile.objects.filter(user__username__icontains = search)
         return render(request, 'social/profile_search.html', {'search': search, 'results': results})

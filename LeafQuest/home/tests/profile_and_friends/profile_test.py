@@ -17,7 +17,7 @@ class ProfileTest(TestCase):
     def test_profile_info(self):
         self.assertEqual(self.profile.user, self.user)
         self.assertEqual(self.profile.name, 'Testing')
-        self.assertEqual(self.profile.aboutMe, 'Hello World')
+        self.assertEqual(self.profile.about_me, 'Hello World')
 
     # test that profiles can be updated via the editing form
     def test_profile_update(self):
@@ -29,7 +29,7 @@ class ProfileTest(TestCase):
         self.profile.refresh_from_db()
         self.assertEqual(self.profile.user, self.user)
         self.assertEqual(self.profile.name, 'New Name')
-        self.assertEqual(self.profile.aboutMe, 'New about me text')
+        self.assertEqual(self.profile.about_me, 'New about me text')
 
     # test that private setting works
     def test_private_profile(self):
