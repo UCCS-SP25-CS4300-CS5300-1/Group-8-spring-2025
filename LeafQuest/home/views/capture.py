@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from ..forms import CapturedImageForm
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def capture_view(request):
     if request.method == 'POST':
         form = CapturedImageForm(request.POST, request.FILES)
