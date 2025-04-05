@@ -49,3 +49,20 @@ jobs:
       - name: Push Package
         run: |
           docker push ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+
+      - name: Deploy App
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 23291
+          script: |
+            cd /sdat/leafquest/
+            docker compose down
+            git fetch
+            git pull
+            docker pull ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+            docker compose up -d
+            docker exec leafquest python manage.py migrate
+            docker container restart leafquest
