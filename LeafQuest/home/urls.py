@@ -11,14 +11,17 @@ urlpatterns = [
     }),
 
     path('', home_view, name="home"),
-    path('capture', capture_view, name="capture"),
-    path('plantdex', plantdex_view, name="plantdex"),
-    path('badges', badges_view, name="badges"),
-    path('map', map_view, name="map"),
-    path('social', social_view, name="social"),
+    path('capture/', capture_view, name="capture"),
+    path('plantdex/', plantdex_view, name="plantdex"),
+    path('badges/', badges_view, name="badges"),
+    path('map/', map_view, name="map"),
+
+    path('social/', social_view, name="social"),
+    path('social/search/', profile_search_view, name="search"),
+    path('social/search/results/', profile_search, name="search_results"),
 
     # profile viewing/editing and friends list
-    path('profile', profile_redir, name="profile"),
+    path('profile/', profile_redir, name="profile"),
     path('profile/<int:profile_id>', profile_view, name='profile_view'),
     path('profile/edit', edit_profile, name='edit_profile'),
     path('profile/friends', friend_list, name='friend_list'),
@@ -30,9 +33,9 @@ urlpatterns = [
     path('profile/friends/accept/<int:request_id>', accept_req, name='accept_req'),
     path('profile/friends/decline/<int:request_id>', decline_req, name='decline_req'),
 
-    path('settings', settings_view, name="settings"),
-    path('logout', logout_view, name="logout"),
-    path('about', about_view, name="about"),
+    path('settings/', settings_view, name="settings"),
+    path('logout/', logout_view, name="logout"),
+    path('about/', about_view, name="about"),
 
     # account management
     path('accounts/register/', register_view, name='register'),

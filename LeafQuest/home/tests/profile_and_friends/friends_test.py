@@ -9,8 +9,8 @@ class FriendTest(TestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(username='testuser', email='test@test.test', password='t3st1ng')
         self.user2 = User.objects.create_user(username='testing', email='test2@test.test', password='t3st1ng')
-        self.profile1 = Profile.objects.create(user=self.user1, name='Test User', aboutMe='Hello World')
-        self.profile2 = Profile.objects.create(user=self.user2, name='Testing', aboutMe='Hello World')
+        self.profile1 = Profile.objects.create(user=self.user1, name='Test User', about_me='Hello World')
+        self.profile2 = Profile.objects.create(user=self.user2, name='Testing', about_me='Hello World')
         self.friendList1 = FriendList.objects.create(profile=self.profile1)
         self.friendList2 = FriendList.objects.create(profile=self.profile2)
 
