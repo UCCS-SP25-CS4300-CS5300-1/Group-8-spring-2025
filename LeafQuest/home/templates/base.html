@@ -20,9 +20,9 @@
 
         <a href="{% url 'profile' %}" class="profile-btn">
             {% if request.user.is_authenticated %}
-            <img src="/media/{{ request.user.profile.pfp }}" alt="Profile Picture" class="profile-pic">
+                <img src="/media/{{ request.user.profile.pfp }}" alt="Profile Picture" class="profile-pic">
             {% else %}
-            <span class="material-symbols-outlined">person</span>
+                <span class="material-symbols-outlined">person</span>
             {% endif %}
         </a>
     </nav>

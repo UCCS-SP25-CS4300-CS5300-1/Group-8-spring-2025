@@ -42,7 +42,7 @@ jobs:
       - name: Fix OpenAI silliness
         run: |
           sed -i 's/```markdown//' feedback.md
-          sed -i 's/```//' feedback.md
+          sed -i '${s/```$//}' feedback.md
 
       - name: Comment Feedback on Pull Request
         uses: thollander/actions-comment-pull-request@v3.0.1

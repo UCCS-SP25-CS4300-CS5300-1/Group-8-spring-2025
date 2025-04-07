@@ -17,3 +17,4 @@ pip freeze > requirements.txt
 ```
 
 This way we can ensure all our environments are using the same dependencies.
+

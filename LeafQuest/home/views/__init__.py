@@ -12,3 +12,4 @@ from .register import register_view
 from .friend_reqs import *
 from .friends import friend_list
 from .login import login_view
+from .search import *
