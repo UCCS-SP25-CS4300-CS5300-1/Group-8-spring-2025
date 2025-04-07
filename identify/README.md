@@ -10,3 +10,4 @@
   - val_accuracy: 0.9223 (92.2%)
   - val_loss: 0.3364
 - Dataset available (raw or .tfrecord) upon request
+- If using model for custom tests, a good photo for identification is one that is close to the plant so that other plants are limited or removed from the image
