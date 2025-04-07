@@ -14,3 +14,4 @@ LeafQuest/staticfiles
 # AI Code review testing artifacts
 diff.txt
 feedback.md
+identify/LeafQuest_FinalModel.keras
