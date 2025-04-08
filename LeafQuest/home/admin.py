@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Profile)
 admin.site.register(FriendList)
 admin.site.register(FriendRequest)
+admin.site.register(Badge)
