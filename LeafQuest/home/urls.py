@@ -11,7 +11,6 @@ urlpatterns = [
     }),
 
     path('', home_view, name="home"),
-    path('api/', home_view, name="home"),
     path('capture/', capture_view, name="capture"),
     path('plantdex/', plantdex_view, name="plantdex"),
     path('badges/', badges_view, name="badges"),
