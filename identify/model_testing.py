@@ -15,10 +15,9 @@ warnings.filterwarnings("ignore", category=DeprecationWarning, module='tensorflo
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-
 # Constants
-IMG_PATH = "img"
-MODEL_PATH = os.path.join("models", "LeafQuest_FinalModel.keras")
+IMG_PATH = "img"  # Put test images is the img folder, 3 are provided by default
+MODEL_PATH = os.path.join("models", f'LeafQuest_IdentifyModel_v{os.getenv("IDENTIFY_MODEL_VER", "1")}.keras')
 IMG_SIZE = (224, 224)
 
 # Create & load label mapping
@@ -29,13 +28,6 @@ with open("class_labels.txt", "r") as f:
         class_labels[int(index)] = label
 
 image_paths = glob.glob(os.path.join(IMG_PATH, "*"))
-
-# Load model
-for img_path in image_paths:
-    img = image.load_img(img_path, target_size=IMG_SIZE)
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = tf.keras.applications.resnet.preprocess_input(img_array)
 
 model = tf.keras.models.load_model(MODEL_PATH)
 
