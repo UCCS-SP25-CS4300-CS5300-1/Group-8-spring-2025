@@ -1,26 +1,29 @@
 ##
-## For custom tests, add images to the "identify/img" folder and run this script
+# Model Testing File
 ##
 
 import warnings
 import os
-warnings.filterwarnings("ignore", category=UserWarning, module='tensorflow')
-warnings.filterwarnings("ignore", category=DeprecationWarning, module='tensorflow')
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import glob
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
-import glob
+
+warnings.filterwarnings("ignore", category=UserWarning, module='tensorflow')
+warnings.filterwarnings("ignore", category=DeprecationWarning, module='tensorflow')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+
 
 # Constants
-IMG_PATH = r"identify/img"
-MODEL_PATH = "identify\LeafQuest_FinalModel.keras"
+IMG_PATH = "img"
+MODEL_PATH = os.path.join("models", "LeafQuest_FinalModel.keras")
 IMG_SIZE = (224, 224)
 
 # Create & load label mapping
 class_labels = {}
-with open("identify\class_labels.txt", "r") as f:
+with open("class_labels.txt", "r") as f:
     for line in f:
         index, label = line.strip().split(", ")
         class_labels[int(index)] = label
@@ -41,7 +44,7 @@ for img_path in image_paths:
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = tf.keras.applications.resnet.preprocess_input(img_array)
-    
+
     predictions = model.predict(img_array)
     predicted_class_index = np.argmax(predictions, axis=1)[0]
     predicted_class_name = class_labels.get(predicted_class_index, "Unknown")
