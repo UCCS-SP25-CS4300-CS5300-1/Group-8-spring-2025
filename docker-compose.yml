@@ -2,6 +2,20 @@ name: leafquest
 services:
   server:
     container_name: leafquest
+    networks:
+      - host-net
     ports:
-      - 8001:8000
+      - ${PUB_PORT}:8000
+    environment:
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+    volumes:
+      - ${PERSIST_DATA_LOC}/db.sqlite3:/app/db.sqlite3
+      - ${PERSIST_DATA_LOC}/media:/app/home/media
+    restart: unless-stopped
     image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+
+networks:
+  host-net:
+    name: ${HOSTNAME}-net
+    external: true

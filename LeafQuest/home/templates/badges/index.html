@@ -1,8 +1,30 @@
-
 {% extends "base.html" %}
 
 {% block title %}Badges - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2>Badges</h2>
+<h2 class="mb-4">Badges</h2>
+
+<div class="row">
+    {% for badge in all_badges %}
+        <div class="col-md-4 mb-4">
+            <div class="card {% if badge in user_badges %}border-success{% else %}border-secondary{% endif %}">
+                <img src="{{ badge.image.url }}" 
+                     class="card-img-top {% if badge not in user_badges %}opacity-25{% endif %}" 
+                     alt="{{ badge.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ badge.name }}</h5>
+                    <p class="card-text">{{ badge.description }}</p>
+                    {% if badge in user_badges %}
+                        <span class="badge bg-success">Unlocked</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Locked</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">No badges available yet. Keep exploring!</p>
+    {% endfor %}
+</div>
 {% endblock %}

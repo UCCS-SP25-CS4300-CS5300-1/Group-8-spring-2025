@@ -3,5 +3,24 @@
 {% block title %}Map - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2>Map</h2>
+
+<h2 class="mb-4">Map</h2>
+
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+<script>
+function initMap() {
+  const center = { lat: 38.859055, lng: -104.813499 }; 
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 8,
+    center: center,
+  });
+}
+</script>
+
+<!-- Google Maps API -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFB4eRGGAU_Z9_ZpzxgpqzKNYUHV-TNdE&callback=initMap">
+</script>
+
 {% endblock %}

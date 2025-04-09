@@ -3,5 +3,26 @@
 {% block title %}PlantDex - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2>PlantDex</h2>
+<h2 class="mb-4">PlantDex</h2>
+
+<div class="row">
+    {% for plant in plants %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    <p class="card-text">{{ plant.description|truncatechars:100 }}</p>
+                    <a href="{% url 'plant_detail' plant.id %}" class="btn btn-outline-primary">View Details</a>
+                    <form action="{% url 'delete_plant' plant.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">No plants saved yet. Go out and capture some!</p>
+    {% endfor %}
+</div>
 {% endblock %}
