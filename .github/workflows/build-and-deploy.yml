@@ -26,11 +26,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PACKAGES_PAT }}
 
-      - name: Build
+      - name: Build Main Server
         run: |
           docker build -t ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest .
 
-      - name: Test Package
+      - name: Test Main Server
         run: |
           docker run -d -p 8000:8000 ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
           sleep 10
@@ -46,9 +46,18 @@ jobs:
             echo "Staticfiles test failed" && exit 1
           fi
 
-      - name: Push Package
+      - name: Push Main Server
         run: |
           docker push ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
+
+      - name: Build Identifier
+        run: |
+          cd identify
+          docker build -t ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest-identify:latest .
+
+      - name: Push Identifier
+        run: |
+          docker push ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest-identify:latest
 
       - name: Deploy App
         uses: appleboy/ssh-action@v1.2.2
