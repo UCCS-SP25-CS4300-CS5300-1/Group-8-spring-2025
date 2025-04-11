@@ -153,3 +153,18 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
     border-radius: 15px;
     background-color: transparent;
 }
+
+.capture-image-detail {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.capture-image-detail > img {
+    width: 100%;
+}
+
+h2 > sup {
+    font-size: 0.85rem;
+    top: -1em;
+}

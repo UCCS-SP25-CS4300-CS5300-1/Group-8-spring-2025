@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ capture.ident_request.result }} captured by {{ user }} - LeafQuest{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">{{ capture.ident_request.result }}<br>
+        <sup>Captured by <a href="{% url 'profile_view' profile.id %}">{{ capture.user }}</a></sup>
+    </h2>
+    <div class="container d-flex flex-row">
+        <div class="capture-image-detail">
+            <img src="{{ capture.ident_request.image.url }}" class="object-fit-scale" alt="{{ capture.ident_request.result }}">
+        </div>
+        <div class="container">
+            <p>We are %{{ capture.ident_request.confidence|floatformat:1 }} sure that this is a picture of {{ capture.ident_request.result }}</p>
+            <p>Captured on {{ capture.uploaded_at }}</p>
+            <div id="ai-summary">
+                <p>AI summary coming soon</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
