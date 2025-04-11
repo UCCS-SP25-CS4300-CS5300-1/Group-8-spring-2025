@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 from ..models import Profile
 from ..models.captured_image_model import CapturedImage
@@ -18,7 +19,7 @@ def plantdex_view(request):
 def plantdex_detail_view(request, pk):
     context = {}
 
-    capture = CapturedImage.objects.get(pk=pk)
+    capture = get_object_or_404(CapturedImage, pk=pk)
     context['capture'] = capture
 
     context['user'] = capture.user
