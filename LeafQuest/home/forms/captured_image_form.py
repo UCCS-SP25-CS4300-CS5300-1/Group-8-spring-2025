@@ -15,6 +15,7 @@ class CapturedImageForm(forms.Form):
         ext = name.rsplit('.', 1)[1]
         if ext not in ['jpg', 'jpeg', 'png']:
             self.add_error('image', f'upload must be an image file')
+            raise forms.ValidationError
 
         image.name = str(ident_request.req_id) + '.' + ext
 
