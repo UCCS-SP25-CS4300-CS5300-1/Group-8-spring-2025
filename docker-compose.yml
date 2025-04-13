@@ -23,6 +23,9 @@ services:
       - leafquest-net
     environment:
       - MAIN_SERVER_HOST=http://leafquest:8000
+      - IDENTIFY_MODEL_VER=${IDENTIFY_MODEL_VER}
+      - TF_ENABLE_ONEDNN_OPTS=0
+      - TF_CPP_MIN_LOG_LEVEL=2
     volumes:
       - ${PERSIST_DATA_LOC}/models:/app/models
     restart: unless-stopped
