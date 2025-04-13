@@ -22,8 +22,8 @@
     {% endif %}
 
     <h4>PlantDex <a class="btn btn-success" href="{% url 'plantdex' %}" role="button">See More</a></h4>
-    <div class="container-fluid border border-dark mb-2" style="height:100px;">
-
+    <div class="container-fluid border border-dark mb-2" style="height:17rem; overflow-y: scroll;">
+    {% include 'plantdex/recent-discoveries.html' %}
     </div>
 
     <h4>Badges <a class="btn btn-success" href="{% url 'badges' %}" role="button">See More</a></h4>

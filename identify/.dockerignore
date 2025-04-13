@@ -1,0 +1,8 @@
+.venv/
+img/
+uploads/
+setup/
+make_labels.py
+model_testing.py
+train_resnet50.ipynb
+*.keras

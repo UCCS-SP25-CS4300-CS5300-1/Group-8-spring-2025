@@ -1,0 +1,4 @@
+.venv/
+img/
+uploads/
+*.keras

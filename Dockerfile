@@ -13,7 +13,7 @@ COPY LeafQuest .
 RUN sed -i 's/DEBUG = True/DEBUG = False/' LeafQuest/settings.py
 RUN python manage.py flush --noinput
 RUN python manage.py migrate
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

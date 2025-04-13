@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import Profile, FriendList, FriendRequest
+from home.models import Profile, FriendList, FriendRequest, CapturedImage
 from django.contrib.auth.decorators import login_required
 from ..forms import ProfileForm
 
@@ -23,6 +23,11 @@ def profile_view(request, profile_id):
             sentReq = True
 
     context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend}
+
+    # Get captured images
+    captures = CapturedImage.objects.filter(user=profile.user)
+    context['captures'] = captures
+
     return render(request, 'profile/index.html', context)
 
 

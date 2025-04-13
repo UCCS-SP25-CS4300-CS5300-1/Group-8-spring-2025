@@ -4,6 +4,8 @@ from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+from .views.plantdex import plantdex_detail_view, plantdex_view
+
 urlpatterns = [
 
     re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {
@@ -12,9 +14,11 @@ urlpatterns = [
 
     path('', home_view, name="home"),
     path('capture/', capture_view, name="capture"),
-    path('plantdex/', plantdex_view, name="plantdex"),
     path('badges/', badges_view, name="badges"),
     path('map/', map_view, name="map"),
+
+    path('plantdex/', plantdex_view, name="plantdex"),
+    path('plantdex/<pk>/', plantdex_detail_view, name="plantdex_detail"),
 
     path('social/', social_view, name="social"),
     path('social/search/', profile_search_view, name="search"),

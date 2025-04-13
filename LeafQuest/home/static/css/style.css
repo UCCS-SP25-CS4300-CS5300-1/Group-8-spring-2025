@@ -2,6 +2,7 @@
 .navbar-custom {
     background-color: #23bf48;
 }
+
 .sidebar-custom {
     background-color: #b8ff93;
 }
@@ -13,6 +14,7 @@
     font-size: 1.2rem;
     font-weight: bold;
 }
+
 .profile-btn {
     display: block;
     width: 40px;
@@ -69,11 +71,11 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
 }
 
 .dark-mode .navbar-custom {
-    background-color: #14532d; 
+    background-color: #14532d;
 }
 
 .dark-mode .sidebar-custom {
-    background-color: #1f4b2e; 
+    background-color: #1f4b2e;
 }
 
 .dark-mode .profile-btn {
@@ -106,4 +108,63 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
 
 .dark-mode .list-group-item a:hover {
     color: #fff;
+}
+
+.image-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 133.33%; /* 3:4 aspect ratio => (4/3 * 100)% */
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+.image-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Scale without stretching */
+}
+
+.card-hover-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+}
+
+.image-card:hover .card-hover-info {
+    opacity: 1;
+}
+
+.plantdex-card {
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+.capture-image-detail {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.capture-image-detail > img {
+    width: 100%;
+}
+
+h2 > sup {
+    font-size: 0.85rem;
+    top: -1em;
 }

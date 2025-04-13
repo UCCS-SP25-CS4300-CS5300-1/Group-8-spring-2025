@@ -4,18 +4,36 @@ services:
     container_name: leafquest
     networks:
       - host-net
+      - leafquest-net
     ports:
       - ${PUB_PORT}:8000
     environment:
       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - IDENT_SERVER_HOST=http://leafquest-identify:8080
     volumes:
       - ${PERSIST_DATA_LOC}/db.sqlite3:/app/db.sqlite3
       - ${PERSIST_DATA_LOC}/media:/app/home/media
     restart: unless-stopped
     image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest:latest
 
+  identify:
+    container_name: leafquest-identify
+    networks:
+      - leafquest-net
+    environment:
+      - MAIN_SERVER_HOST=http://leafquest:8000
+      - IDENTIFY_MODEL_VER=${IDENTIFY_MODEL_VER}
+      - TF_ENABLE_ONEDNN_OPTS=0
+      - TF_CPP_MIN_LOG_LEVEL=2
+    volumes:
+      - ${PERSIST_DATA_LOC}/models:/app/models
+    restart: unless-stopped
+    image: ghcr.io/uccs-sp25-cs4300-cs5300-1/leafquest-identify:latest
+
 networks:
+  leafquest-net:
+
   host-net:
     name: ${HOSTNAME}-net
     external: true

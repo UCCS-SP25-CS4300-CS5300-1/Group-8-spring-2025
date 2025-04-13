@@ -1,7 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from ..models.captured_image_model import CapturedImage
 
 @login_required
 def home_view(request):
-    return render(request, 'home/index.html')
+    context = {}
+
+    # Get captured images
+    captures = CapturedImage.objects.filter(user=request.user)
+    context['captures'] = captures
+
+    return render(request, 'home/index.html', context)

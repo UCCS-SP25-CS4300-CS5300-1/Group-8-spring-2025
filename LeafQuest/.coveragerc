@@ -1,8 +1,11 @@
 [run]
 omit =
-    # Omit Django API files
+    # Omit Django files
     LeafQuest/asgi.py
     LeafQuest/wsgi.py
     LeafQuest/settings.py
     manage.py
-    home/migrations
+
+    # Omit migrations
+    home/migrations/*
+    identify_api/*  # most of this can't be covered by unit tests
