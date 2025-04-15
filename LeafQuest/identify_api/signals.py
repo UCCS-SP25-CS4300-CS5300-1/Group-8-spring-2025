@@ -21,7 +21,8 @@ def identify(sender, instance, created, **kwargs):
         }
 
         response = requests.post(
-            os.environ.get("IDENT_SERVER_HOST") + "/identify",
+            #os.environ.get("IDENT_SERVER_HOST") + "/identify",
+            os.environ.get("IDENT_SERVER_HOST", 'http://localhost:8080') + "/identify",
             files=files,
             data=data
         )
