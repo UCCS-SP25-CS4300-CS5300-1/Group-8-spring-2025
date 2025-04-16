@@ -22,6 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai PyGithub
 
+      - name: Generate Pylint report
+        run: |
+          pylint --recursive=y LeafQuest/ > pylint.txt
+
       - name: Get PR Diff
         run: |
           git fetch
@@ -36,8 +40,10 @@ jobs:
       - name: Upload Review Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ai-code-review
-          path: feedback.md
+          name: review-artifacts
+          path: |
+            feedback.md
+            pylint.txt
 
       - name: Fix OpenAI silliness
         run: |
@@ -48,6 +54,11 @@ jobs:
         uses: thollander/actions-comment-pull-request@v3.0.1
         with:
           file-path: feedback.md
+
+      - name: Comment Linting Report on Pull Request
+        uses: thollander/actions-comment-pull-request@v3.0.1
+        with:
+          file-path: pylint.txt
 
       - name: Cleanup
         run: rm diff.txt feedback.md
