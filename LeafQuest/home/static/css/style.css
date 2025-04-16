@@ -126,6 +126,16 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
     width: 100%;
     height: 100%;
     object-fit: contain; /* Scale without stretching */
+    z-index: 0;
+}
+
+.capture-pfp-overlay {
+    position:absolute;
+    z-index:1;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
 }
 
 .card-hover-info {

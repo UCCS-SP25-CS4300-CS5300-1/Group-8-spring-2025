@@ -46,10 +46,9 @@
             {% endif %}
         </div>     
             <div class="card-body">
-                {% if profile.private and not is_friend %}
-                    
+                {% if profile.private and not is_friend and profile.user != request.user %}
                     <h2>This profile is <strong>private</strong></h2>
-                    <p>Only {{profile.user.username}}'s friends can see their pictures and badges</p>
+                     <p>Only {{profile.user.username}}'s friends can see their pictures and badges</p>
 
                 {% else %}
 
