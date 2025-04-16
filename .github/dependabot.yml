@@ -6,6 +6,6 @@
 version: 2
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
-    directories: ["/", "/identify"] # Location of package manifests
+    directories: ["/"] # Location of package manifests
     schedule:
       interval: "weekly"
