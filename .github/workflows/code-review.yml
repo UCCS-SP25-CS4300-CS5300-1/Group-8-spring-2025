@@ -24,7 +24,7 @@ jobs:
 
       - name: Generate Pylint report
         run: |
-          pylint --recursive=y LeafQuest/ > pylint.txt
+          python -m pylint --recursive=y LeafQuest/ > pylint.txt
 
       - name: Get PR Diff
         run: |
