@@ -178,3 +178,21 @@ h2 > sup {
     font-size: 0.85rem;
     top: -1em;
 }
+
+.container .nav button{
+    border-color: #1f4b2e;
+}
+
+.container .nav .active {
+    background-color: #1f4b2e;
+    color: #e0e0e0;
+    border-color: #1f4b2e;
+}
+
+.nav-link {
+    color: #1f4b2e;
+}
+
+.nav-link:hover {
+    color:#14532d;
+}
