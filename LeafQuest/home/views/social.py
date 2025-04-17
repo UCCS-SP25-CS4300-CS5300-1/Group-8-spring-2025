@@ -10,7 +10,7 @@ def social_view(request):
     profile = request.user.profile
     friend_list = FriendList.objects.get(profile=profile)
     friends = friend_list.friends.all()
-    captures = CapturedImage.objects.all()
+    all_captures = CapturedImage.objects.all()
 
-    context = {'profile': profile, 'friends': friends, 'captures': captures}  
+    context = {'profile': profile, 'friends': friends, 'all_captures': all_captures}  
     return render(request, 'social/index.html', context)

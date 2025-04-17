@@ -9,6 +9,8 @@ def home_view(request):
 
     # Get captured images
     captures = CapturedImage.objects.filter(user=request.user)
+    all_captures = CapturedImage.objects.all()
     context['captures'] = captures
+    context['all_captures'] = all_captures
 
     return render(request, 'home/index.html', context)
