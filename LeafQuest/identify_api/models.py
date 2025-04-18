@@ -23,6 +23,12 @@ class IdentRequest(models.Model):
     result = models.TextField(null=True, blank=True)
     confidence = models.FloatField(null=True, blank=True)
 
+    gps_latitude = models.FloatField(null=True, blank=True)
+    gps_lat_north = models.BooleanField(null=True, blank=True)
+
+    gps_longitude = models.FloatField(null=True, blank=True)
+    gps_lon_west = models.BooleanField(null=True, blank=True)
+
     def __str__(self):
         if self.req_status == self.StatusChoices.CREATED:
             return f'CREATED - {self.req_id}'

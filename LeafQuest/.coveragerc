@@ -6,6 +6,12 @@ omit =
     LeafQuest/settings.py
     manage.py
 
+    # identify_api can't reliably be tested in a CI environment
+    identify_api/signals.py
+    identify_api/models.py
+    identify_api/views.py
+    identify_api/*
+
     # Omit migrations
     home/migrations/*
-    identify_api/*  # most of this can't be covered by unit tests
+    identify_api/migrations/*
