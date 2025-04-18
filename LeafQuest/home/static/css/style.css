@@ -110,6 +110,10 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
     color: #fff;
 }
 
+.dark-mode .profile-bg {
+    background-color:#1f4b2e; 
+}
+
 .image-card {
     position: relative;
     overflow: hidden;
@@ -189,8 +193,17 @@ h2 > sup {
     border-color: #1f4b2e;
 }
 
+.dark-mode .container .nav .active {
+    color: #e0e0e0;
+    border-color:#23bf48;
+}
+
 .nav-link {
     color: #1f4b2e;
+}
+
+.dark-mode .nav-link {
+    color:#23bf48;
 }
 
 .nav-link:hover {
