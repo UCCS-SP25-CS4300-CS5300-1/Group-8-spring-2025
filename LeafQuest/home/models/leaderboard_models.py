@@ -34,47 +34,49 @@ class LeaderboardManager(models.Model):
                 entry.rank -= 1
                 entry.save()
 
+    def new_number_1(self):
+        entries = LeaderboardEntry.objects.filter(rank=1)
+        for entry in entries:
+            entry.rank = 2
+            entry.save()
+
     # to be called when a new capture is uploaded
     def update_rank(self, entry):
         # increment capture count
         entry.num_captures += 1
 
-        # if user is #1 rank, update most_captures
-        if entry.rank == 1:
+        # user passes current #1 or increases capture count as current #1
+        if entry.num_captures > self.most_captures:
+            # drop previous #1 user(s) to #2
+            self.new_number_1()
+            entry.rank = 1
+            entry.save()
             self.update_most_captures(entry)
 
         # user ties #1 captures
         elif entry.num_captures == self.most_captures:
             entry.rank = 1
             entry.save()
-            entries = LeaderboardEntry.objects.filter(rank__gt=1)
             self.shift_ranks(2, 1)
-
-        # user passes current #1
-        elif entry.num_captures > self.most_captures:
-            # drop previous #1 user(s) to #2
-            entries = LeaderboardEntry.objects.filter(rank=1)
-            for old_rank_1 in entries:
-                old_rank_1.rank += 1
-                old_rank_1.save()
-
-            entry.rank = 1
-            entry.save()
-            self.update_most_captures(entry)
         
         # increase in num_captures has no bearing on #1 rank
         else:
+            current_rank = entry.rank
             next_rank = entry.rank - 1
             entries = LeaderboardEntry.objects.filter(rank=next_rank)
+
+            # capture count ties capture count of next ranked user
+            if entry.num_captures == entries[0]:
+                entry.rank -= 1
+                entry.save()
+
+            # capture count doesn't reach next rank
+            else:
+                self.shift_ranks(entry.rank, 0)
+                entry.rank -= 1
+                entry.save()     
+
             self.shift_ranks(next_rank, 0)
 
             entry.rank -= 1
             entry.save()
-
-
-
-            
-
-
-                
-        
