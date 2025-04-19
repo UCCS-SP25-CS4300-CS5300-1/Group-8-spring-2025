@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <img src="/media/{{ profile.pfp }}" width="250" height="250">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
                     <h3>{{ profile.name }}</h3>
                     </br>
@@ -36,6 +36,20 @@
                             <a class="btn btn-danger" href="{% url 'remove_friend' profile.id %}" role="button">Remove Friend</a>
                         {% endif %}
                     {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ leaderboard_entry.num_captures }} Plants Captured</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {% if leaderboard_entry.num_captures != 0 %}
+                                    Rank #{{ leaderboard_entry.rank }}
+                                {% else %}
+                                    Unranked
+                                {% endif %}
+                            </h6>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% if profile.user == user %}
