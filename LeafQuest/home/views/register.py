@@ -16,7 +16,7 @@ def register_view(request):
             profile = Profile.objects.create(user=user)
             profile.save()
             friendlist = FriendList.objects.create(profile=profile)
-            leaderboardentry = LeaderboardEntry.create(profile=profile)
+            leaderboardentry = LeaderboardEntry.objects.create(profile=profile)
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
