@@ -3,7 +3,7 @@ from .profile_model import Profile
 
 class LeaderboardEntry(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    rank = models.IntegerField(default=Profile.objects.count())
+    rank = models.IntegerField(default=999999)
     num_captures = models.IntegerField(default=0)
 
     def __str__(self):
