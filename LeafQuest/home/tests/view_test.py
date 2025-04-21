@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 from ..views import *
-from ..models import Profile, FriendList
+from ..models import Profile, FriendList, LeaderboardEntry
 from django.urls import reverse
 
 
@@ -13,6 +13,7 @@ class ViewTests(TestCase):
         self.client.login(username='testuser', password='t3st1ng')
         self.profile = Profile.objects.create(user=self.user, name='Testing', about_me='Hello World')
         self.friendlist = FriendList.objects.create(profile=self.profile)
+        self.leaderboardentry = LeaderboardEntry.objects.create(profile=self.profile, rank=1, num_captures=2)
 
     def test_home_page(self):
         request = self.factory.get('')
