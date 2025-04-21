@@ -4,40 +4,81 @@
 {% block title %}Capture - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2>Capture an Image</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <label for="image">Choose or Capture an Image:</label>
-        <input type="file" name="image" id="image" accept="image/*" capture="environment" required>
-
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container mt-4">
+      <h2 class="mb-3">Select an Image</h2>
+        <form id="uploadForm" method="post" enctype="multipart/form-data" class="mb-4">
+          {% csrf_token %}
+            
+          <div class="mb-3">
+            <label for="image" class="form-label">Choose an Image</label>
+            <input type="file" class="form-control" name="image" id="image" accept="image/*" capture="environment" required>
+          </div>
+          
+          <button type="submit" class="btn btn-success">Upload</button>
+        </form>
+        
+        <div class="text-center my-4">
+            <hr class="my-4">
+            <h5 class="text-muted">OR</h5>
+            <button type="button" id="launchCameraBtn" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#captureModal">
+              Use Camera
+            </button>
+        </div>
+    </div>
     
-    <hr>
-    
-    <h3>OR</h3>
-
-    <h2>Use Camera (Advanced)</h2>
-    <video id="video" autoplay></video>
-    <canvas id="canvas" style="display: none;"></canvas>
-    <button id="capture">Capture Image</button>
-    <button id="upload" style="display: none;">Upload Captured Image</button>
+    <div class="modal fade" id="captureModal" tabindex="-1" role="dialog" aria-labelledby="captureModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="captureModalLabel">Capture a Plant!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <video id="video" style="position:relative; width:100%; height:100%;" autoplay playsinline muted></video>
+            <canvas id="canvas" style="position:relative; width:100%; height:100%; display: none;"></canvas>
+          </div>
+          <div class="modal-footer">
+            <button id="capture" type="button" class="btn btn-primary">Capture</button>
+            <button id="upload" type="submit" class="btn btn-success" form="uploadForm" style="display: none;">Upload</button>
+            <button id="retake" type="button" class="btn btn-secondary" style="display: none;">Retake</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const captureBtn = document.getElementById('capture');
         const uploadBtn = document.getElementById('upload');
+        const retakeBtn = document.getElementById('retake');
+        const launchCameraBtn = document.getElementById('launchCameraBtn');
 
         // Request access to the camera
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
             .then(stream => {
                 video.srcObject = stream;
             })
             .catch(error => {
                 console.error('Camera access denied:', error);
             });
+
+        retakeBtn.addEventListener('click', function() {
+            canvas.style.display = 'none';
+            video.style.display = 'block';
+            uploadBtn.style.display = 'none';
+            retakeBtn.style.display = 'none';
+            captureBtn.style.display = 'block';
+        });
+
+        launchCameraBtn.addEventListener('click', function() {
+            canvas.style.display = 'none';
+            video.style.display = 'block';
+            uploadBtn.style.display = 'none';
+            retakeBtn.style.display = 'none';
+            captureBtn.style.display = 'block';
+        });
 
         captureBtn.addEventListener('click', function () {
             const context = canvas.getContext('2d');
@@ -52,6 +93,11 @@
                 dataTransfer.items.add(file);
                 document.getElementById('image').files = dataTransfer.files;
                 uploadBtn.style.display = 'block'; // Show upload button
+                canvas.style.display = 'block';
+                video.style.display = 'none';
+                retakeBtn.style.display = 'block';
+                uploadBtn.style.display = 'block';
+                captureBtn.style.display = 'none';
             }, "image/jpeg");
         });
     </script>
