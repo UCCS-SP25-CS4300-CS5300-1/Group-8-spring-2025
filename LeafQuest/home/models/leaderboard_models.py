@@ -1,6 +1,8 @@
 from django.db import models
 from .profile_model import Profile
 
+# leaderboard entry for a given user
+# contains rank and number of caputers
 class LeaderboardEntry(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     rank = models.IntegerField(default=999999)
@@ -9,16 +11,18 @@ class LeaderboardEntry(models.Model):
     def __str__(self):
         return self.profile.name
 
+# methods to manage users on the leaderboard
 class LeaderboardManager(models.Model):
     leaderboard_id = models.IntegerField()
     most_captures = models.IntegerField(default=0)
+    starting_rank = models.IntegerField(default=0)
 
-    # update the most_captures 
+    # update the most_captures variable
     def update_most_captures(self, entry):
         self.most_captures = entry.num_captures
         self.save()
 
-    # shift ranks
+    # shift ranks up or down
     def shift_ranks(self, start_rank, direction):
         # get the QuerySet for all entries at or below the provided rank
         entries = LeaderboardEntry.objects.filter(rank__gte=start_rank)
@@ -30,53 +34,75 @@ class LeaderboardManager(models.Model):
                 entry.save()
         else:
             # raise ranks for all users in QuerySet
+            # for when a sole user at a given rank ties the next rank
             for entry in entries:
                 entry.rank -= 1
                 entry.save()
 
+    # drop previous #1 ranked users when someone captures a new plant
     def new_number_1(self):
         entries = LeaderboardEntry.objects.filter(rank=1)
         for entry in entries:
             entry.rank = 2
             entry.save()
 
+    # rank users after their first capture upload
+    def first_capture(self, entry):
+        entries = LeaderboardEntry.objects.filter(num_captures=1)
+        
+        # start user tied with other users that have 1 capture
+        if entries:
+            entry.rank = self.starting_rank
+
+        # if no users have 1 capture, set user to the next lowest rank
+        # update starting_rank accordingly
+        else: 
+            self.starting_rank = entries[0].rank + 1
+            self.save()
+            entry.rank = starting_rank
+
+        entry.save()
+
     # to be called when a new capture is uploaded
     def update_rank(self, entry):
         # increment capture count
         entry.num_captures += 1
 
-        # user passes current #1 or increases capture count as current #1
+        # user increases capture count as current #1
         if entry.num_captures > self.most_captures:
             # drop previous #1 user(s) to #2
-            self.new_number_1()
+            #self.new_number_1()
+            self.shift_ranks(1, 0)
             entry.rank = 1
             entry.save()
             self.update_most_captures(entry)
-
-        # user ties #1 captures
-        elif entry.num_captures == self.most_captures:
-            entry.rank = 1
-            entry.save()
-            self.shift_ranks(2, 1)
         
         # increase in num_captures has no bearing on #1 rank
         else:
-            current_rank = entry.rank
-            next_rank = entry.rank - 1
-            entries = LeaderboardEntry.objects.filter(rank=next_rank)
+            # for users on the leaderboard
+            if entry.num_captures > 1:
+                current_rank = entry.rank
+                next_rank = entry.rank - 1
+                nr_entries = LeaderboardEntry.objects.filter(rank=next_rank)
+                cr_entries = LeaderboardEntry.objects.filter(rank=current_rank)
 
-            # capture count ties capture count of next ranked user
-            if entry.num_captures == entries[0]:
-                entry.rank -= 1
-                entry.save()
+                # capture count ties capture count of next ranked user
+                if entry.num_captures == nr_entries[0].num_captures:
+                    entry.rank -= 1
+                    entry.save()
 
-            # capture count doesn't reach next rank
+                    # if only user at current rank, shift ranks up
+                    if not cr_entries:
+                        self.shift_ranks(current_rank, 1)
+
+                # capture count doesn't reach next rank
+                else:
+                    # if tied with other users, shift other users down
+                    if cr_entries.count() > 1:
+                        self.shift_ranks(entry.rank, 0)
+                        entry.rank -= 1
+                    entry.save()     
+
+            # for users uploading their first capture
             else:
-                self.shift_ranks(entry.rank, 0)
-                entry.rank -= 1
-                entry.save()     
-
-            self.shift_ranks(next_rank, 0)
-
-            entry.rank -= 1
-            entry.save()
+                self.first_capture(entry)
