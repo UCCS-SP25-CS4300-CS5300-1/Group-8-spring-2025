@@ -2,6 +2,7 @@
     <div class="row justify-content-start">
       {% for capture in all_captures %}
       {% if capture.user != request.user %}
+      {% if not capture.user.profile.private %}
         <div class="col-sm-6 col-md-5 col-lg-3 d-flex">
           <a href="{% url 'plantdex_detail' capture.id %}" class="card plantdex-card m-1 w-100">
             <div class="capture">
@@ -19,6 +20,7 @@
             </div>       
           </a>
         </div>
+      {% endif %}
       {% endif %}
       {% empty %}
           <p class="text-muted">Nothing to see here</p>
