@@ -15,7 +15,7 @@ def capture_view(request):
 
             # update rankings following capture upload
             entry = LeaderboardEntry.objects.get(profile=request.user.profile)
-            manager = LeaderboardManager.objects.get(leaderboard_id=1)
+            manager = LeaderboardManager.objects.get(pk=1)
             manager.update_rank(entry)
             
             return redirect('capture')

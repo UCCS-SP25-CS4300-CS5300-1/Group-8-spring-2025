@@ -1,19 +1,20 @@
 from django.db import models
 from .profile_model import Profile
 
+
 # leaderboard entry for a given user
-# contains rank and number of caputers
+# contains rank and number of captures
 class LeaderboardEntry(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     rank = models.IntegerField(default=999999)
     num_captures = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.profile.name
+        return self.profile.user.username
+
 
 # methods to manage users on the leaderboard
 class LeaderboardManager(models.Model):
-    leaderboard_id = models.IntegerField()
     most_captures = models.IntegerField(default=0)
     starting_rank = models.IntegerField(default=0)
 
