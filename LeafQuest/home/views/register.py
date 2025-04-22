@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from ..forms import CreateUserForm
 from django.contrib import messages
-from ..models import Profile, FriendList
+from ..models import Profile, FriendList, LeaderboardEntry
 from django.contrib.auth import login
 
 # user registration page
@@ -16,6 +16,7 @@ def register_view(request):
             profile = Profile.objects.create(user=user)
             profile.save()
             friendlist = FriendList.objects.create(profile=profile)
+            leaderboardentry = LeaderboardEntry.objects.create(profile=profile)
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')

@@ -20,15 +20,17 @@ urlpatterns = [
     path('plantdex/', plantdex_view, name="plantdex"),
     path('plantdex/<pk>/', plantdex_detail_view, name="plantdex_detail"),
 
+    # social features
     path('social/', social_view, name="social"),
     path('social/search/', profile_search_view, name="search"),
     path('social/search/results/', profile_search, name="search_results"),
+    path('social/leaderboard/', leaderboard_view, name="leaderboard_view"),
+    path('social/friends', friend_list, name='friend_list'),
 
-    # profile viewing/editing and friends list
+    # profile viewing/editing
     path('profile/', profile_redir, name="profile"),
     path('profile/<int:profile_id>', profile_view, name='profile_view'),
     path('profile/edit', edit_profile, name='edit_profile'),
-    path('profile/friends', friend_list, name='friend_list'),
 
     # friend request views - no templates, just code to handle friend management
     path('profile/<int:profile_id>/add', add_friend, name='add_friend'),

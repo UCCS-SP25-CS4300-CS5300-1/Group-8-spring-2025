@@ -12,6 +12,7 @@ class ProfileTest(TestCase):
         self.client.force_login(self.user)
         self.profile = Profile.objects.create(user=self.user, name='Testing', about_me='Hello World', pfp='images/profile/defaultprofile.png')
         self.friendList = FriendList.objects.create(profile=self.profile)
+        self.leaderboardentry = LeaderboardEntry.objects.create(profile=self.profile, rank=1, num_captures=2)
 
     # test that object data is accurate
     def test_profile_info(self):
@@ -36,6 +37,7 @@ class ProfileTest(TestCase):
         self.user2 = User.objects.create_user(username='testuser2', email='test2@test.test', password='t3st1ng')
         self.profile2 = Profile.objects.create(user=self.user2, name='Testing 2', about_me='Hello World', pfp='images/profile/defaultprofile.png', private=True)
         self.friendList2 = FriendList.objects.create(profile=self.profile2)
+        self.leaderboardentry2 = LeaderboardEntry.objects.create(profile=self.profile2, rank=2, num_captures=1)
 
         res = self.client.get(reverse('profile_view', kwargs={"profile_id": self.user2.id}))
         self.assertContains(res, "Only testuser2's friends can see their pictures and badges")

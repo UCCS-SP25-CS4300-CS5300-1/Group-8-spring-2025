@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row justify-content-start">
+        {% if friends %}
+        <table class="leaderboard" cellpadding="5">
+            <thead>
+                <tr>
+                  <th class="header-rank">Rank</th>
+                  <th>User</th>
+                  <th>Captures</th>
+                </tr>
+            </thead>
+            {% for entry in leaderboard_entries %}
+            {% if entry.profile in friends or entry.profile == user.profile %}
+            {% if entry.num_captures > 0 %}             
+            <tr>
+                <td>{{ entry.rank }}</td>
+                <td><img src="/media/{{ entry.profile.pfp }}" alt="Profile Picture" class="profile-btn entry-pfp"><a href="{% url 'profile_view' entry.profile.id %}">{{ entry.profile.user.username }}</a></td>
+                <td>{{ entry.num_captures }}</td>
+            </tr>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </table>
+        {% else %}
+            <h3>Add some friends to see how your PlantDexes stack up</h3>
+        {% endif %}
+    </div>
+</div>

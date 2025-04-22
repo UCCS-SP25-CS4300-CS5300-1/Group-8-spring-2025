@@ -7,16 +7,34 @@
 
     </br>
     <a class="btn btn-success" href="{% url 'search' %}" role="button">Search for a User <span class="material-symbols-outlined" style="font-size:16px;">search</span></a>
+    <a class="btn btn-success" href="{% url 'leaderboard_view' %}" role="button">Leaderboard <span class="material-symbols-outlined" style="font-size:16px;">trophy</span></a>
 
     </br></br>
-    <h4>Friend Activity</h4>
-    <div class="container-fluid border border-dark mb-2" style="height:100px;">
-                
+    <ul class="nav nav-tabs nav-justified" id="socialTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="friend-activity-tab" data-bs-toggle="tab" data-bs-target="#friend-activity" type="button" role="tab" aria-controls="friend-activity" aria-selected="true">
+                Friend Activity
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="explore-tab" data-bs-toggle="tab" data-bs-target="#explore" type="button" role="tab" aria-controls="explore" aria-selected="false">
+                Explore
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="nav-navContent">
+        <div class="tab-pane fade show active" id="friend-activity" role="tabpanel" aria-labelledby="friend-activity-tab">
+            <div class="container-fluid border border-dark mb-2" style="height:24rem; overflow-y: scroll;">
+                {% include 'social/friend_activity.html' %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="explore" role="tabpanel" aria-labelledby="explore-tab">
+            <div class="container-fluid border border-dark mb-2" style="height:24rem; overflow-y: scroll;">
+                {% include 'social/explore.html' %}
+            </div>
+        </div>
     </div>
 
-    </br>
-    <h4>Plants Near You</h4>
-    <div class="container-fluid border border-dark mb-2" style="height:100px;">
-                
-    </div>
 {% endblock %}

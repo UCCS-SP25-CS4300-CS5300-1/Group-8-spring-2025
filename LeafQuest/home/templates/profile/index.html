@@ -8,15 +8,15 @@
 {% endfor %}
 
 <div class="col d-flex justify-content-center">
-    <div class="card border-success" style="width: 50rem;">
+    <div class="card border-success profile-bg" style="width: 50rem;">
         <div class="card-header">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="/media/{{ profile.pfp }}" width="250" height="250">
                 </div>
-                <div class="col-md-8">
-                    <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
-                    <h3>{{ profile.name }}</h3>
+                <div class="col-md-4">
+                    <h2>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h2>
+                    <h4>{{ profile.name }}</h4>
                     </br>
                     <p>{{ profile.about_me }}</p>
 
@@ -37,6 +37,20 @@
                         {% endif %}
                     {% endif %}
                 </div>
+                <div class="col-md-4">
+                    <div class="card rank-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ leaderboard_entry.num_captures }} Plants Captured</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {% if leaderboard_entry.num_captures != 0 %}
+                                    Rank #{{ leaderboard_entry.rank }}{% if leaderboard_entry.rank == 1 %}<span class="material-symbols-outlined" style="font-size:16px;">trophy</span>{% endif %}
+                                {% else %}
+                                    Unranked
+                                {% endif %}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% if profile.user == user %}
             <div>
@@ -46,10 +60,9 @@
             {% endif %}
         </div>     
             <div class="card-body">
-                {% if profile.private and not is_friend %}
-                    
+                {% if profile.private and not is_friend and profile.user != request.user %}
                     <h2>This profile is <strong>private</strong></h2>
-                    <p>Only {{profile.user.username}}'s friends can see their pictures and badges</p>
+                     <p>Only {{profile.user.username}}'s friends can see their pictures and badges</p>
 
                 {% else %}
 

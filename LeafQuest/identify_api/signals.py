@@ -60,6 +60,12 @@ def identify(sender, instance, created, **kwargs):
             'req_id': instance.req_id,
         }
 
+        response = requests.post(
+            os.environ.get("IDENT_SERVER_HOST") + "/identify",
+            #os.environ.get("IDENT_SERVER_HOST", 'http://localhost:8080') + "/identify",
+            files=files,
+            data=data
+        )
 
         try:
             response = requests.post(

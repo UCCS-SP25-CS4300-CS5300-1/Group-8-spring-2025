@@ -20,3 +20,6 @@ feedback.md
 
 # Files related to deployed server
 data/
+
+# Local AI models
+identify/models

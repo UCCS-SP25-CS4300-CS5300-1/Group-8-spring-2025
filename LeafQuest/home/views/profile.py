@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import Profile, FriendList, FriendRequest, CapturedImage
+from home.models import Profile, FriendList, FriendRequest, CapturedImage, LeaderboardEntry
 from django.contrib.auth.decorators import login_required
 from ..forms import ProfileForm
 
@@ -8,6 +8,7 @@ from ..forms import ProfileForm
 def profile_view(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
     user_fl = FriendList.objects.get(profile=request.user.profile)
+    leaderboard_entry = LeaderboardEntry.objects.get(profile=profile)
     is_friend = False
     sentReq = False
 
@@ -22,7 +23,7 @@ def profile_view(request, profile_id):
         if FriendRequest.objects.filter(sender=request.user.profile, receiver=profile, pending=True).exists():
             sentReq = True
 
-    context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend}
+    context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend, 'leaderboard_entry': leaderboard_entry}
 
     # Get captured images
     captures = CapturedImage.objects.filter(user=profile.user)

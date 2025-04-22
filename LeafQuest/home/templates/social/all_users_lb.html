@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row justify-content-start">
+        <table class="leaderboard" cellpadding="4">
+            <thead>
+                <tr>
+                  <th class="header-rank">Rank</th>
+                  <th>User</th>
+                  <th>Captures</th>
+                </tr>
+            </thead>
+            {% for entry in leaderboard_entries %}
+            {% if entry.num_captures > 0 %}             
+            <tr>
+                <td>{{ entry.rank }}</td>
+                <td><img src="/media/{{ entry.profile.pfp }}" alt="Profile Picture" class="profile-btn entry-pfp"><a href="{% url 'profile_view' entry.profile.id %}">{{ entry.profile.user.username }}</a></td>
+                <td>{{ entry.num_captures }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div>

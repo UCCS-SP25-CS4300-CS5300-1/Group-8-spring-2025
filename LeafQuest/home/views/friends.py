@@ -11,4 +11,4 @@ def friend_list(request):
     requests = FriendRequest.objects.all()
 
     context = {'profile': profile, 'friend_list': friend_list, 'friends': friends, 'requests': requests}
-    return render(request, 'profile/friend_list.html', context)
+    return render(request, 'social/friend_list.html', context)
