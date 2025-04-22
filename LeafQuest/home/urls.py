@@ -6,12 +6,15 @@ from django.conf import settings
 
 from .views.plantdex import plantdex_detail_view, plantdex_view
 
+from .views import map
+
 urlpatterns = [
 
     re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {
         'document_root': settings.MEDIA_ROOT,  # Evil ugly garbage, thanks lazy Django devs
     }),
 
+    path('api/', home_view, name="api"),
     path('', home_view, name="home"),
     path('capture/', capture_view, name="capture"),
     path('badges/', badges_view, name="badges"),
@@ -47,5 +50,11 @@ urlpatterns = [
     path('accounts/register/', register_view, name='register'),
     path('accounts/login/', login_view, name='login'),
     path('accounts/logout/', logout_view, name='logout'),
+
+    # map pins
+    path('api/pins/', map.get_user_pins, name='get_pins'),
+    path('api/pins/save/', map.save_pin, name='save_pin'),
+    path('api/pins/<int:pin_id>/edit/', map.update_pin, name='edit_pin'),
+    path('api/pins/<int:pin_id>/delete/', map.delete_pin, name='delete_pin')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this allows uploaded images to load correctly

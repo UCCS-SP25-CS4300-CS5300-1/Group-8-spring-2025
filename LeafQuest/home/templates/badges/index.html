@@ -5,22 +5,15 @@
 {% block content %}
 <h2 class="mb-4">Badges</h2>
 
-<div class="row">
+<div class="d-flex flex-wrap justify-content-start">
     {% for badge in all_badges %}
-        <div class="col-md-4 mb-4">
-            <div class="card {% if badge in user_badges %}border-success{% else %}border-secondary{% endif %}">
-                <img src="{{ badge.image.url }}" 
-                     class="card-img-top {% if badge not in user_badges %}opacity-25{% endif %}" 
-                     alt="{{ badge.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ badge.name }}</h5>
-                    <p class="card-text">{{ badge.description }}</p>
-                    {% if badge in user_badges %}
-                        <span class="badge bg-success">Unlocked</span>
-                    {% else %}
-                        <span class="badge bg-secondary">Locked</span>
-                    {% endif %}
-                </div>
+        <div class="badge-container">
+            <img src="{{ badge.image.url }}"
+                 class="badge-icon {% if badge not in user_badges %}locked{% endif %}"
+                 alt="{{ badge.name }}">
+            <div class="badge-tooltip">
+                <strong>{{ badge.name }}</strong><br>
+                {{ badge.description }}
             </div>
         </div>
     {% empty %}
