@@ -39,13 +39,6 @@ class LeaderboardManager(models.Model):
                 entry.rank -= 1
                 entry.save()
 
-    # drop previous #1 ranked users when someone captures a new plant
-    def new_number_1(self):
-        entries = LeaderboardEntry.objects.filter(rank=1)
-        for entry in entries:
-            entry.rank = 2
-            entry.save()
-
     # rank users after their first capture upload
     def first_capture(self, entry):
         entries = LeaderboardEntry.objects.filter(num_captures=1)
@@ -57,9 +50,9 @@ class LeaderboardManager(models.Model):
         # if no users have 1 capture, set user to the next lowest rank
         # update starting_rank accordingly
         else: 
-            self.starting_rank = entries[0].rank + 1
+            self.starting_rank = self.starting_rank + 1
             self.save()
-            entry.rank = starting_rank
+            entry.rank = self.starting_rank
 
         entry.save()
 
@@ -71,7 +64,6 @@ class LeaderboardManager(models.Model):
         # user increases capture count as current #1
         if entry.num_captures > self.most_captures:
             # drop previous #1 user(s) to #2
-            #self.new_number_1()
             self.shift_ranks(1, 0)
             entry.rank = 1
             entry.save()

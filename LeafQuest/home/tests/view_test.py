@@ -74,6 +74,10 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "testuser")
 
+    def test_leaderboard_view(self):
+        response = self.client.get(reverse('leaderboard_view'))
+        self.assertEqual(response.status_code, 200)
+
     def test_settings_view(self):
         request = self.factory.get('/settings/')
         request.user = self.user
