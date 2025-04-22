@@ -36,6 +36,7 @@
           <div class="modal-body">
             <video id="video" style="position:relative; width:100%; height:100%;" autoplay playsinline muted></video>
             <canvas id="canvas" style="position:relative; width:100%; height:100%; display: none;"></canvas>
+            <div id="captureErrorMessage" style="display: none">There was a problem connecting to the camera.</div>
           </div>
           <div class="modal-footer">
             <button id="capture" type="button" class="btn btn-primary">Capture</button>
@@ -47,58 +48,6 @@
       </div>
     </div>
 
-    <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const captureBtn = document.getElementById('capture');
-        const uploadBtn = document.getElementById('upload');
-        const retakeBtn = document.getElementById('retake');
-        const launchCameraBtn = document.getElementById('launchCameraBtn');
-
-        // Request access to the camera
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
-            .then(stream => {
-                video.srcObject = stream;
-            })
-            .catch(error => {
-                console.error('Camera access denied:', error);
-            });
-
-        retakeBtn.addEventListener('click', function() {
-            canvas.style.display = 'none';
-            video.style.display = 'block';
-            uploadBtn.style.display = 'none';
-            retakeBtn.style.display = 'none';
-            captureBtn.style.display = 'block';
-        });
-
-        launchCameraBtn.addEventListener('click', function() {
-            canvas.style.display = 'none';
-            video.style.display = 'block';
-            uploadBtn.style.display = 'none';
-            retakeBtn.style.display = 'none';
-            captureBtn.style.display = 'block';
-        });
-
-        captureBtn.addEventListener('click', function () {
-            const context = canvas.getContext('2d');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Convert to a data URL and create a file object
-            canvas.toBlob(blob => {
-                const file = new File([blob], "captured_image.jpg", { type: "image/jpeg" });
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
-                document.getElementById('image').files = dataTransfer.files;
-                uploadBtn.style.display = 'block'; // Show upload button
-                canvas.style.display = 'block';
-                video.style.display = 'none';
-                retakeBtn.style.display = 'block';
-                uploadBtn.style.display = 'block';
-                captureBtn.style.display = 'none';
-            }, "image/jpeg");
-        });
-    </script>
+    {% load static %}
+    <script src="{% static 'js/capture.js' %}"></script>
 {% endblock %}
