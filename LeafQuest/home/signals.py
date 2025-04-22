@@ -38,7 +38,7 @@ def update_leaderboard_entry(sender, instance, created, **kwargs):
                 if user not in badge.users.all():
                     badge.users.add(user)
             except Badge.DoesNotExist:
-                pass 
+                pass
 
 @receiver(post_save, sender=Leaderboard)
 def update_leaderboard(sender, instance, created, **kwargs):
