@@ -28,7 +28,7 @@ def profile_view(request, profile_id):
     context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend}
 
     # Get captured images
-    captures = CapturedImage.objects.filter(user=profile.user)
+    captures = CapturedImage.objects.filter(user=profile.user).order_by('-uploaded_at')
     context['captures'] = captures
 
     # Get the leaderboard entry for this user

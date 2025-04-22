@@ -8,8 +8,8 @@ def home_view(request):
     context = {}
 
     # Get captured images
-    captures = CapturedImage.objects.filter(user=request.user)
-    all_captures = CapturedImage.objects.all()
+    captures = CapturedImage.objects.filter(user=request.user).order_by('-uploaded_at')
+    all_captures = CapturedImage.objects.all().order_by('-uploaded_at')
     context['captures'] = captures
     context['all_captures'] = all_captures
 

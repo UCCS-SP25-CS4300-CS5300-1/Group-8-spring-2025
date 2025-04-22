@@ -10,7 +10,7 @@ from ..models.captured_image_model import CapturedImage
 def plantdex_view(request):
     context = {}
 
-    captures = CapturedImage.objects.filter(user=request.user)
+    captures = CapturedImage.objects.filter(user=request.user).order_by('-uploaded_at')
     context['captures'] = captures
 
     return render(request, 'plantdex/index.html', context)
