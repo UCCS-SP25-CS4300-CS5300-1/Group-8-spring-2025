@@ -1,12 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Account Registration</h2>
+<div class="container mt-5" style="max-width: 500px;">
+  <h2 class="mb-4">Account Registration</h2>
 
-  <form method="post">
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+      {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="Create User" />
+    {% for field in form %}
+      <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+        {% if field.errors %}
+          <div class="text-danger small">
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success w-100">Create Account</button>
   </form>
-  {{form.errors}}
+
+</div>
 {% endblock %}
