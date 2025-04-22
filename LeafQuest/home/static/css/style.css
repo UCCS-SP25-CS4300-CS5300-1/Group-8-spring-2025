@@ -209,3 +209,50 @@ h2 > sup {
 .nav-link:hover {
     color:#14532d;
 }
+
+table {
+    table-layout: fixed;
+}
+
+.leaderboard .header-rank {
+    width: 10rem;
+}
+
+.leaderboard thead {
+    border-bottom: 1px solid;
+    border-color: #000000;
+}
+
+.leaderboard a {
+    color: #1f4b2e;;
+}
+
+.leaderboard tr:nth-child(even) {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #1f4b2e;
+}
+
+.dark-mode .leaderboard thead {
+    border-bottom: 1px solid;
+    border-color: #FFFFFF;
+}
+
+.dark-mode .leaderboard a {
+    color: #FFFFFF;
+}
+
+.dark-mode .leaderboard tr:nth-child(even) {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #1f4b2e;
+}
+
+.dark-mode .rank-card {
+    background-color: #121212;
+}
+
+.entry-pfp {
+    display: inline-block;
+    margin: 10px;
+}

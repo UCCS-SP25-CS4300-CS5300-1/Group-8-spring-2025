@@ -13,3 +13,4 @@ from .friend_reqs import *
 from .friends import friend_list
 from .login import login_view
 from .search import *
+from .leaderboard import *

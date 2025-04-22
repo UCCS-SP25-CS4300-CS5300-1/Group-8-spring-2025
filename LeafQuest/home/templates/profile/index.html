@@ -15,8 +15,8 @@
                     <img src="/media/{{ profile.pfp }}" width="250" height="250">
                 </div>
                 <div class="col-md-4">
-                    <h1>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h1>
-                    <h3>{{ profile.name }}</h3>
+                    <h2>{{ profile.user.username }}{% if profile.private %}<span class="material-symbols-outlined me-2 inline-icon" style="font-size:36px;">lock</span>{% endif %}</h2>
+                    <h4>{{ profile.name }}</h4>
                     </br>
                     <p>{{ profile.about_me }}</p>
 
@@ -38,12 +38,12 @@
                     {% endif %}
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card rank-card">
                         <div class="card-body">
                             <h5 class="card-title">{{ leaderboard_entry.num_captures }} Plants Captured</h5>
                             <h6 class="card-subtitle mb-2 text-muted">
                                 {% if leaderboard_entry.num_captures != 0 %}
-                                    Rank #{{ leaderboard_entry.rank }}
+                                    Rank #{{ leaderboard_entry.rank }}{% if leaderboard_entry.rank == 1 %}<span class="material-symbols-outlined" style="font-size:16px;">trophy</span>{% endif %}
                                 {% else %}
                                     Unranked
                                 {% endif %}
