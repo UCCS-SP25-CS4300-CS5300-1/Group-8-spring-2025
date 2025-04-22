@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
-from home.models import Profile, FriendList, FriendRequest, CapturedImage, LeaderboardEntry
 from django.contrib.auth.decorators import login_required
 from ..forms import ProfileForm
+from ..models.leaderboard_models import Leaderboard
+from ..models.profile_model import Profile
+from ..models.friend_models import FriendList, FriendRequest
+from ..models.captured_image_model import CapturedImage
 
 
 @login_required
 def profile_view(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
     user_fl = FriendList.objects.get(profile=request.user.profile)
-    leaderboard_entry = LeaderboardEntry.objects.get(profile=profile)
     is_friend = False
     sentReq = False
 
@@ -23,11 +25,20 @@ def profile_view(request, profile_id):
         if FriendRequest.objects.filter(sender=request.user.profile, receiver=profile, pending=True).exists():
             sentReq = True
 
-    context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend, 'leaderboard_entry': leaderboard_entry}
+    context = {'profile': profile, 'sentReq': sentReq, 'is_friend': is_friend}
 
     # Get captured images
     captures = CapturedImage.objects.filter(user=profile.user)
     context['captures'] = captures
+
+    # Get the leaderboard entry for this user
+    leaderboard_entry = None
+    try:
+        leaderboard_entry = Leaderboard.objects.get(profile=profile)
+    except Leaderboard.DoesNotExist:
+        leaderboard_entry = Leaderboard.objects.create(user=profile.user, profile=profile, num_captures=len(captures))
+    context['leaderboard_entry'] = leaderboard_entry
+
 
     return render(request, 'profile/index.html', context)
 
