@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from ..forms import CapturedImageForm
-from ..models import LeaderboardEntry, LeaderboardManager
+from ..models import Leaderboard
 from django.contrib.auth.decorators import login_required
 
 
@@ -12,11 +12,6 @@ def capture_view(request):
             captured_image = form.save(commit=False)
             captured_image.user = request.user
             captured_image.save()
-
-            # update rankings following capture upload
-            entry = LeaderboardEntry.objects.get(profile=request.user.profile)
-            manager = LeaderboardManager.objects.get(pk=1)
-            manager.update_rank(entry)
             
             return redirect('capture')
     else:

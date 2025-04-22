@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from home.models import Profile, FriendList, FriendRequest, CapturedImage, LeaderboardEntry
 from django.contrib.auth.decorators import login_required
 from ..forms import ProfileForm
+from ..models.leaderboard_models import Leaderboard
+from ..models.profile_model import Profile
+from ..models.friend_models import FriendList, FriendRequest
+from ..models.captured_image_model import CapturedImage
 
 
 @login_required
@@ -31,9 +34,9 @@ def profile_view(request, profile_id):
     # Get the leaderboard entry for this user
     leaderboard_entry = None
     try:
-        leaderboard_entry = LeaderboardEntry.objects.get(profile=profile)
-    except LeaderboardEntry.DoesNotExist:
-        leaderboard_entry = LeaderboardEntry.objects.create(profile=profile, num_captures=len(captures))
+        leaderboard_entry = Leaderboard.objects.get(profile=profile)
+    except Leaderboard.DoesNotExist:
+        leaderboard_entry = Leaderboard.objects.create(user=profile.user, profile=profile, num_captures=len(captures))
     context['leaderboard_entry'] = leaderboard_entry
 
 

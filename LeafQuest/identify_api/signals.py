@@ -17,37 +17,43 @@ def identify(sender, instance, created, **kwargs):
         exif = piexif.load(image)
 
         if "GPS" in exif and len(exif["GPS"]) > 0:
-            # remove seconds from calculation to improve privacy
-            # Precision should be between 4.5 and 11.1 km depending on latitude
-            gps = exif["GPS"]
-            lat_deg = gps[2][0][0] / gps[2][0][1]
-            lat_min = gps[2][1][0] / gps[2][1][1]
-            lat = lat_deg + (lat_min / 60)
-            if gps[1].decode("utf-8") == "N":
-                gps_lat_north = True
-            elif gps[1].decode("utf-8") == "S":
-                gps_lat_north = False
+            try:
+                # remove seconds from calculation to improve privacy
+                # Precision should be between 4.5 and 11.1 km depending on latitude
+                gps = exif["GPS"]
+                lat_deg = gps[2][0][0] / gps[2][0][1]
+                lat_min = gps[2][1][0] / gps[2][1][1]
+                lat = lat_deg + (lat_min / 60)
+                if gps[1].decode("utf-8") == "N":
+                    gps_lat_north = True
+                elif gps[1].decode("utf-8") == "S":
+                    gps_lat_north = False
 
-            lon_deg = gps[4][0][0] / gps[4][0][1]
-            lon_min = gps[4][1][0] / gps[4][1][1]
-            lon = lon_deg + (lon_min / 60)
-            if gps[3].decode("utf-8") == "W":
-                gps_lon_west = True
-            elif gps[3].decode("utf-8") == "E":
-                gps_lon_west = False
+                lon_deg = gps[4][0][0] / gps[4][0][1]
+                lon_min = gps[4][1][0] / gps[4][1][1]
+                lon = lon_deg + (lon_min / 60)
+                if gps[3].decode("utf-8") == "W":
+                    gps_lon_west = True
+                elif gps[3].decode("utf-8") == "E":
+                    gps_lon_west = False
 
 
-            if lat != instance.gps_latitude or lon != instance.gps_longitude:
-                instance.gps_latitude = lat
-                instance.gps_lat_north = gps_lat_north
-                instance.gps_longitude = lon
-                instance.gps_lon_west = gps_lon_west
-                instance.save()
+                if lat != instance.gps_latitude or lon != instance.gps_longitude:
+                    instance.gps_latitude = lat
+                    instance.gps_lat_north = gps_lat_north
+                    instance.gps_longitude = lon
+                    instance.gps_lon_west = gps_lon_west
+                    instance.save()
 
-            # Ensure EXIF stripped from image
-            exif["GPS"] = {}
-            exif_bytes = piexif.dump(exif)
-            piexif.insert(exif_bytes, image)
+                # Ensure EXIF stripped from image
+                try:
+                    exif["GPS"] = {}
+                    exif_bytes = piexif.dump(exif)
+                    piexif.insert(exif_bytes, image)
+                except ValueError:
+                    print("Error Stripping Exif Data on IdentRequest", instance.req_id)
+            except Exception as e:
+                print("Error Processing GPS Data", instance.req_id, e, gps)
 
     # send identity request
     if instance.image and instance.req_status == IdentRequest.StatusChoices.CREATED:
