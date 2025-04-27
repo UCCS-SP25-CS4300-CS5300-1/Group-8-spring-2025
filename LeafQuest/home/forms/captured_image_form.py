@@ -2,7 +2,7 @@
 Form for receiving captured images
 """
 from django import forms
-from LeafQuest.identify_api.models import IdentRequest
+from identify_api.models import IdentRequest
 from ..models import CapturedImage
 
 
