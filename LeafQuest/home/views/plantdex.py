@@ -30,4 +30,3 @@ def plantdex_detail_view(request, pk):
     context['profile'] = Profile.objects.get(user=capture.user)
 
     return render(request, 'plantdex/details.html', context)
-    
