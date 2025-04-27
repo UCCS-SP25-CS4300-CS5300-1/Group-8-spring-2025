@@ -1,4 +1,8 @@
+"""
+Views for the about page
+"""
 from django.shortcuts import render
+
 
 def about_view(request):
     project_description = (

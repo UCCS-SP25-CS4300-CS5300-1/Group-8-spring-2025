@@ -1,4 +1,6 @@
-from .ci_test import CITest
+"""
+All tests for home
+"""
 from .cd_test import CDTest
 from .view_test import ViewTests
 from .profile_and_friends.profile_test import ProfileTest

@@ -1,6 +1,11 @@
-from django.contrib.auth.models import User
+"""
+Models for Leaderboard.
+"""
+from django.contrib.auth import get_user_model
 from django.db import models
 from .profile_model import Profile
+
+User = get_user_model()
 
 
 class Leaderboard(models.Model):
@@ -10,4 +15,4 @@ class Leaderboard(models.Model):
     rank = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return "{}'s Leaderboard Entry".format(self.user.username)
+        return f"{self.user.username}'s Leaderboard Entry"

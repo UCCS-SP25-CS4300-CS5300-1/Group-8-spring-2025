@@ -1,3 +1,6 @@
+"""
+Django stub, registers app configs
+"""
 from django.apps import AppConfig
 
 

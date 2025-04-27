@@ -1,16 +1,14 @@
-from django.db.models.signals import post_save
+"""
+Signals for home
+"""
+from django.db.models.signals import post_save, post_migrate
 from django.dispatch import receiver
 
 from .models.profile_model import Profile
 from .models.captured_image_model import CapturedImage
 from .models.leaderboard_models import Leaderboard
+from .models.badge_model import Badge
 
-from .models import Badge
-from django.contrib.auth.models import User
-
-from django.db.models.signals import post_migrate
-from django.apps import apps
-from django.dispatch import receiver
 
 @receiver(post_save, sender=CapturedImage)
 def update_leaderboard_entry(sender, instance, created, **kwargs):
@@ -40,22 +38,19 @@ def update_leaderboard_entry(sender, instance, created, **kwargs):
             except Badge.DoesNotExist:
                 pass
 
+
 @receiver(post_save, sender=Leaderboard)
 def update_leaderboard(sender, instance, created, **kwargs):
     all_entries = Leaderboard.objects.all().order_by('-num_captures')
 
-    for i in range(len(all_entries)):
-        entry = all_entries[i]
+    for i, entry in enumerate(all_entries):
         Leaderboard.objects.filter(pk=entry.pk).update(rank=i+1)
+
 
 @receiver(post_migrate)
 def create_default_badges(sender, **kwargs):
     if sender.name != "home":
         return
-
-    from .models import Badge
-    from django.core.files.base import ContentFile
-    import os
 
     default_badges = [
         {"name": "Beginner", "description": "Captured 10 unique plants!", "image": "badges/beginner.png"},

@@ -1,11 +1,12 @@
+"""
+Models for plant identification request handling
+"""
 import uuid
 
 from django.db import models
 from django.db.models import ImageField
 
 
-
-# Create your models here.
 class IdentRequest(models.Model):
     """An IdentRequest stores information about a request to identify a plant"""
     req_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -32,12 +33,10 @@ class IdentRequest(models.Model):
     def __str__(self):
         if self.req_status == self.StatusChoices.CREATED:
             return f'CREATED - {self.req_id}'
-        elif self.req_status == self.StatusChoices.PENDING:
+        if self.req_status == self.StatusChoices.PENDING:
             return f'PENDING - {self.req_id}'
-        elif self.req_status == self.StatusChoices.RETURNED:
+        if self.req_status == self.StatusChoices.RETURNED:
             return f'RETURNED - {self.req_id}'
-        elif self.req_status == self.StatusChoices.FAILED:
+        if self.req_status == self.StatusChoices.FAILED:
             return f'FAILED - {self.req_id}'
-
-
-
+        return f'UNKNOWN - {self.req_id}'
