@@ -1,5 +1,9 @@
 name: Lint Project
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   # Run on pushes and pull requests
   push:
