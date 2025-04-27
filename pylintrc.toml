@@ -47,7 +47,7 @@ ignore = ["CVS", "LeafQuest/home/migrations", "LeafQuest/identify_api/migrations
 # Files or directories matching the regular expression patterns are skipped. The
 # regex matches against base names, not paths. The default value ignores Emacs
 # file locks
-ignore-patterns = ["^\\.#"]
+ignore-patterns = ["^\\.#", "manage.py", "migrations", "apps.py"]
 
 # List of module names for which member attributes should not be checked and will
 # not be imported (useful for modules/projects where namespaces are manipulated
@@ -72,7 +72,7 @@ limit-inference-results = 100
 
 # List of plugins (as comma separated values of python module names) to load,
 # usually to register additional checkers.
-# load-plugins =
+load-plugins = "pylint_django"
 
 # Pickle collected data for later comparisons.
 persistent = true
@@ -267,7 +267,7 @@ max-branches = 12
 max-locals = 15
 
 # Maximum number of parents for a class (see R0901).
-max-parents = 7
+max-parents = 15
 
 # Maximum number of positional arguments for function / method.
 max-positional-arguments = 5
@@ -549,3 +549,13 @@ ignored-argument-names = "_.*|^ignored_|^unused_"
 redefining-builtins-modules = ["six.moves", "past.builtins", "future.builtins", "builtins", "io"]
 
 
+# LeafQuest custom settings
+django-settings-module="LeafQuest.settings"
+
+# unused-argument disabled for positional argument consistency
+# import-error disabled to account for borked dependency checking in pylint (pytest covers these anyway)
+# no-name-in-module disabled for same reason as import-error
+# invalid-name disabled because the project name LeafQuest triggers this alert, which cannot be fixed or selectively ignored
+disable=["unused-argument", "import-error", "no-name-in-module", "invalid-name"]
+
+recursive="y"

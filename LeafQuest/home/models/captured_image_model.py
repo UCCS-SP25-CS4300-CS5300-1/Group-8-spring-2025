@@ -1,5 +1,10 @@
+"""
+Model for user-captured images
+Images are stored in the linked IdentRequest
+"""
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class CapturedImage(models.Model):

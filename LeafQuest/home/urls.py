@@ -1,16 +1,21 @@
-import django
-from django.urls import include, path, re_path
-from .views import *
+"""
+URLs for home
+"""
+from django.views.static import serve
+from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 
+from .views import home_view, capture_view, badges_view, map_view, social_view, profile_search_view, profile_search, \
+    leaderboard_view, friend_list, profile_redir, profile_view, add_friend, edit_profile, cancel_friend, \
+    remove_friend, accept_req, decline_req, settings_view, logout_view, about_view, register_view, login_view, map_views
+
 from .views.plantdex import plantdex_detail_view, plantdex_view
 
-from .views import map
 
 urlpatterns = [
 
-    re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {
+    re_path(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,  # Evil ugly garbage, thanks lazy Django devs
     }),
 
@@ -52,9 +57,9 @@ urlpatterns = [
     path('accounts/logout/', logout_view, name='logout'),
 
     # map pins
-    path('api/pins/', map.get_user_pins, name='get_pins'),
-    path('api/pins/save/', map.save_pin, name='save_pin'),
-    path('api/pins/<int:pin_id>/edit/', map.update_pin, name='edit_pin'),
-    path('api/pins/<int:pin_id>/delete/', map.delete_pin, name='delete_pin')
+    path('api/pins/', map_views.get_user_pins, name='get_pins'),
+    path('api/pins/save/', map_views.save_pin, name='save_pin'),
+    path('api/pins/<int:pin_id>/edit/', map_views.update_pin, name='edit_pin'),
+    path('api/pins/<int:pin_id>/delete/', map_views.delete_pin, name='delete_pin')
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this allows uploaded images to load correctly
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # this allows uploaded images to load correctly

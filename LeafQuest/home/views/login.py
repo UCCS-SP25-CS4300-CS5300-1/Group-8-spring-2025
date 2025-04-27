@@ -1,7 +1,11 @@
+"""
+Views for logging in
+"""
 from django.shortcuts import render, redirect
-from ..forms import LoginForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from ..forms import LoginForm
+
 
 def login_view(request):
     form = LoginForm()

@@ -1,5 +1,6 @@
-from django.db import models
-
+"""
+All Models in the home app
+"""
 # import individual models here
 from .profile_model import Profile
 from .friend_models import FriendList, FriendRequest

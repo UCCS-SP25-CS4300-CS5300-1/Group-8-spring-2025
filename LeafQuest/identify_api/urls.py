@@ -1,4 +1,7 @@
-from django.urls import path, include
+"""
+URLs for identify_api
+"""
+from django.urls import path
 from . import views
 
 urlpatterns = [

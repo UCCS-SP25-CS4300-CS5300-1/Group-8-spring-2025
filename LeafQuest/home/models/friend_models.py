@@ -1,3 +1,6 @@
+"""
+Models for the friend system
+"""
 from django.db import models
 from .profile_model import Profile
 
@@ -6,7 +9,7 @@ from .profile_model import Profile
 class FriendList(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     friends = models.ManyToManyField(Profile, blank=True, related_name='friends')
- 
+
     # add a friend
     def add_friend(self, friend):
         # add friend if friend isn't already added
@@ -31,7 +34,7 @@ class FriendRequest(models.Model):
     # more readable name for model
     def __str__(self):
         return self.sender.name + ' -> ' + self.receiver.name
-    
+
     # accept a friend request
     def accept(self):
         sender_friends = FriendList.objects.get(profile=self.sender)

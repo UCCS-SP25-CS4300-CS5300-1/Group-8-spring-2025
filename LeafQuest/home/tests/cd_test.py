@@ -1,3 +1,6 @@
+"""
+Tests that target areas of Django affected by DEBUG=False
+"""
 from django.test import LiveServerTestCase
 
 

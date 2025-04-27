@@ -1,15 +1,16 @@
+"""
+Views for identify_api
+"""
 import json
 import os
 import uuid
 
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import IdentRequest
 
 
-# Create your views here.
 @csrf_exempt
 def make_request(request):
     if request.method == "POST":
@@ -32,8 +33,9 @@ def make_request(request):
 
             return JsonResponse({'ok': True})
 
-        else:
-            return JsonResponse({'error': 'No file provided'}, status=400)
+        return JsonResponse({'error': 'No file provided'}, status=400)
+
+    return JsonResponse({'error': 'Method Not Allowed'}, status=405)
 
 
 @csrf_exempt
@@ -57,8 +59,6 @@ def return_ident(request):
             request.save()
             return JsonResponse({'status': 'ok'})
 
-        else:
-            return JsonResponse({'error': 'No id provided'}, status=400)
-    else:
-        return JsonResponse({'error': 'Method Not Allowed'}, status=405)
+        return JsonResponse({'error': 'No id provided'}, status=400)
 
+    return JsonResponse({'error': 'Method Not Allowed'}, status=405)

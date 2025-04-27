@@ -1,6 +1,9 @@
-
+"""
+Form for editing profiles
+"""
 from django import forms
 from ..models import Profile
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -9,7 +12,7 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
+        for _field_name, field in self.fields.items():
             if field.widget.__class__.__name__ != 'CheckboxInput':
                 field.widget.attrs.update({'class': 'form-control'})
             else:

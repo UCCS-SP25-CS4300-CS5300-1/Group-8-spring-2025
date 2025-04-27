@@ -1,8 +1,16 @@
+"""
+Tests for views
+"""
 from django.test import TestCase, RequestFactory
-from django.contrib.auth.models import User
-from ..views import *
-from ..models import Profile, FriendList, Leaderboard
+from django.contrib.auth import get_user_model
 from django.urls import reverse
+from ..views import (home_view, capture_view, badges_view, map_view, social_view,
+                     profile_redir, profile_view, settings_view, about_view, plantdex_view)
+
+from ..models import Profile, FriendList, Leaderboard
+
+
+User = get_user_model()
 
 
 class ViewTests(TestCase):
@@ -13,7 +21,8 @@ class ViewTests(TestCase):
         self.client.login(username='testuser', password='t3st1ng')
         self.profile = Profile.objects.create(user=self.user, name='Testing', about_me='Hello World')
         self.friendlist = FriendList.objects.create(profile=self.profile)
-        self.leaderboardentry = Leaderboard.objects.create(profile=self.profile, user=self.profile.user, rank=1, num_captures=2)
+        self.leaderboardentry = Leaderboard.objects.create(profile=self.profile, user=self.profile.user,
+                                                           rank=1, num_captures=2)
 
     def test_home_page(self):
         request = self.factory.get('')
@@ -87,7 +96,8 @@ class ViewTests(TestCase):
     def test_register_view(self):
         self.client.get(reverse('logout'))  # log out first
 
-        response = self.client.post(reverse('register'), {'username': 'testuser2', 'email': 'test2@testing.test', 'password1': 'registert3st', 'password2': 'registert3st'})
+        response = self.client.post(reverse('register'), {'username': 'testuser2', 'email': 'test2@testing.test',
+                                                          'password1': 'registert3st', 'password2': 'registert3st'})
         self.assertEqual(response.status_code, 302)
 
     def test_login_view(self):

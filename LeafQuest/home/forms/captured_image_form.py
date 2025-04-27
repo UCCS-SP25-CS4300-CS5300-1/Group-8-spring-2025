@@ -1,7 +1,10 @@
-
+"""
+Form for receiving captured images
+"""
 from django import forms
-from ..models import CapturedImage
 from identify_api.models import IdentRequest
+from ..models import CapturedImage
+
 
 class CapturedImageForm(forms.Form):
     image = forms.ImageField()
@@ -14,7 +17,7 @@ class CapturedImageForm(forms.Form):
         name = image.name
         ext = name.rsplit('.', 1)[1]
         if ext not in ['jpg', 'jpeg', 'png']:
-            self.add_error('image', f'upload must be an image file')
+            self.add_error('image', 'upload must be an image file')
             raise forms.ValidationError
 
         image.name = str(ident_request.req_id) + '.' + ext
@@ -27,4 +30,3 @@ class CapturedImageForm(forms.Form):
         if commit:
             captured_image.save()
         return captured_image
-

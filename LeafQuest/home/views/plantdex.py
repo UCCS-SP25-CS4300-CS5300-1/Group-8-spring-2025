@@ -1,3 +1,6 @@
+"""
+Views for the PlantDex
+"""
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -15,6 +18,7 @@ def plantdex_view(request):
 
     return render(request, 'plantdex/index.html', context)
 
+
 @login_required
 def plantdex_detail_view(request, pk):
     context = {}
@@ -26,4 +30,3 @@ def plantdex_detail_view(request, pk):
     context['profile'] = Profile.objects.get(user=capture.user)
 
     return render(request, 'plantdex/details.html', context)
-    
