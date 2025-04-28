@@ -1,6 +1,6 @@
 absl-py==2.2.2
 astunparse==1.6.3
-bottle==0.13.2
+bottle==0.13.3
 certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
