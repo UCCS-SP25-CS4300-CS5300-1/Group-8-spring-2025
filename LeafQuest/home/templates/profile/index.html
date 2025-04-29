@@ -3,9 +3,13 @@
 
 {% block content %}
 
-{% for message in messages %}
-    <p>{{message}}</p>
-{% endfor %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }} django-message w-50"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 
 <div class="col d-flex justify-content-center">
     <div class="card border-success profile-bg" style="width: 50rem;">
