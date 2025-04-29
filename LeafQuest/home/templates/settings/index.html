@@ -6,31 +6,17 @@
 <h2 class="mb-4">Settings</h2>
 
 <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="darkModeToggle">
-  <label class="form-check-label" for="darkModeToggle">Toggle Dark Mode</label>
+   <form method="POST">
+       {% csrf_token %}
+       <p>
+           <input class="form-check-input" type="checkbox" id="darkModeToggle">
+           <label class="form-check-label" for="darkModeToggle">Toggle Dark Mode</label>
+       </p>
+
+       {{ form.as_p }}
+
+       <button class="btn btn-primary" type="submit">Save Settings</button>
+   </form>
+
 </div>
-
-<script>
-// Dark mode toggle script
-document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    // Check if dark mode was already enabled
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        toggle.checked = true;
-    }
-
-    toggle.addEventListener('change', function() {
-        if (this.checked) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    });
-});
-</script>
 {% endblock %}
