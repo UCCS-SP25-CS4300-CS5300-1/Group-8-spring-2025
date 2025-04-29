@@ -10,9 +10,6 @@
 <div id="map" style="height: 500px; width: 100%;"></div>
 
 <script>
-  let map;
-  let markers = [];
-
   function initMap() {
     const center = { lat: 38.859055, lng: -104.813499 };
     map = new google.maps.Map(document.getElementById("map"), {
@@ -20,14 +17,20 @@
       center: center,
     });
 
-    // Load existing pins
+    // Load user-dropped pins
     fetch('/api/pins/')
       .then(res => res.json())
       .then(pins => {
         pins.forEach(pin => addMarkerFromData(pin));
       });
 
-    // Add pin on click
+    // Load capture pins (plant discoveries)
+    fetch('/api/captures/')
+      .then(res => res.json())
+      .then(captures => {
+        captures.forEach(capture => addCaptureMarker(capture));
+      });
+
     map.addListener("click", function (e) {
       const name = prompt("Enter a name for this pin:");
       if (!name) return;
@@ -54,69 +57,36 @@
       title: pin.name,
     });
 
-    const infoWindow = new google.maps.InfoWindow();
-
-    function updateInfoWindow() {
-      infoWindow.setContent(`
-        <strong>${pin.name}</strong><br>
-        <button onclick="editPin(${pin.id}, this)">Edit</button>
-        <button onclick="deletePin(${pin.id}, this)">Delete</button>
-      `);
-    }
-
-    updateInfoWindow();
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<strong>${pin.name}</strong>`
+    });
 
     marker.addListener("click", () => {
       infoWindow.open(map, marker);
     });
 
     marker._pinId = pin.id;
-    marker._infoWindow = infoWindow;
-    marker._update = updateInfoWindow;
-
     markers.push(marker);
   }
 
-  window.editPin = function(pinId, button) {
-    const newName = prompt("Enter a new name:");
-    if (!newName) return;
-
-    fetch(`/api/pins/${pinId}/edit/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: newName })
-    })
-    .then(res => res.json())
-    .then(data => {
-      const marker = markers.find(m => m._pinId === pinId);
-      if (marker) {
-        marker.setTitle(data.name);
-        marker._infoWindow.setContent(`
-          <strong>${data.name}</strong><br>
-          <button onclick="editPin(${pinId}, this)">Edit</button>
-          <button onclick="deletePin(${pinId}, this)">Delete</button>
-        `);
-      }
+  function addCaptureMarker(capture) {
+    const marker = new google.maps.Marker({
+      position: { lat: capture.lat, lng: capture.lng },
+      map: map,
+      title: capture.name,
+      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
-  };
 
-  window.deletePin = function(pinId, button) {
-    if (!confirm("Are you sure you want to delete this pin?")) return;
-
-    fetch(`/api/pins/${pinId}/delete/`, {
-      method: 'POST'
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        const marker = markers.find(m => m._pinId === pinId);
-        if (marker) {
-          marker.setMap(null);
-          markers = markers.filter(m => m._pinId !== pinId);
-        }
-      }
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<strong>${capture.name}</strong> (Captured)`
     });
-  };
+
+    marker.addListener("click", () => {
+      infoWindow.open(map, marker);
+    });
+
+    markers.push(marker);
+  }
 </script>
 
 <script async defer

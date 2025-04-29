@@ -19,7 +19,7 @@ urlpatterns = [
         'document_root': settings.MEDIA_ROOT,  # Evil ugly garbage, thanks lazy Django devs
     }),
 
-    path('api/', home_view, name="api"),
+    path('api/', home_view, name="api"), # need this for devedu
     path('', home_view, name="home"),
     path('capture/', capture_view, name="capture"),
     path('badges/', badges_view, name="badges"),
@@ -60,6 +60,7 @@ urlpatterns = [
     path('api/pins/', map_views.get_user_pins, name='get_pins'),
     path('api/pins/save/', map_views.save_pin, name='save_pin'),
     path('api/pins/<int:pin_id>/edit/', map_views.update_pin, name='edit_pin'),
-    path('api/pins/<int:pin_id>/delete/', map_views.delete_pin, name='delete_pin')
+    path('api/pins/<int:pin_id>/delete/', map_views.delete_pin, name='delete_pin'),
+    path('api/captures/', map_views.get_capture_pins, name='get_capture_pins')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # this allows uploaded images to load correctly
