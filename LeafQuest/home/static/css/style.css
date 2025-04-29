@@ -229,5 +229,19 @@ table {
 .badge-container:hover .badge-tooltip {
     display: block;
 }
+/* Django Message Boxes */
+.django-message {
+    border-radius: 10px;
+    padding: 1em;
+    color: white;
+}
 
+.error.django-message {
+    background-color: #844;
+    border: 5px #522 solid;
+}
 
+.success.django-message {
+    background-color: #484;
+    border: 5px #252 solid;
+}
