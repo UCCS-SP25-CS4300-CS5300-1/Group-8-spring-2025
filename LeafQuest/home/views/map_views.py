@@ -9,8 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
-from ..models import MapPin
+
 from identify_api.models import IdentRequest
+from ..models import MapPin
 
 
 @login_required
@@ -77,7 +78,6 @@ def get_capture_pins(request):
         lon = capture.gps_longitude
         name = capture.result
 
-        # Fix north/south/east/west if needed
         if capture.gps_lat_north is False:
             lat = -lat
         if capture.gps_lon_west is True:
