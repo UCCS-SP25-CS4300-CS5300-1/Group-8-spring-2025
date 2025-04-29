@@ -3,9 +3,13 @@
 
 {% block content %}
 
-{% for message in messages %}
-    <p>{{message}}</p>
-{% endfor %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }} django-message w-50"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 
 <h3>Pending Requests</h3>
 {% if requests %}

@@ -64,55 +64,7 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
 }
 
 
-/* Dark Mode */
-.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
 
-.dark-mode .navbar-custom {
-    background-color: #14532d;
-}
-
-.dark-mode .sidebar-custom {
-    background-color: #1f4b2e;
-}
-
-.dark-mode .profile-btn {
-    background-color: #333;
-    color: #ccc;
-    border-color: #555;
-}
-
-.dark-mode .profile-btn:hover {
-    background-color: #555;
-    color: white;
-}
-
-.dark-mode footer {
-    background-color: #1c1c1c;
-}
-
-.dark-mode footer p {
-    color: #888;
-}
-
-.dark-mode .list-group-item {
-    background-color: #1c1c1c;
-    color: #ccc;
-}
-
-.dark-mode .list-group-item a {
-    color: #ccc;
-}
-
-.dark-mode .list-group-item a:hover {
-    color: #fff;
-}
-
-.dark-mode .profile-bg {
-    background-color:#1f4b2e; 
-}
 
 .image-card {
     position: relative;
@@ -193,18 +145,13 @@ h2 > sup {
     border-color: #1f4b2e;
 }
 
-.dark-mode .container .nav .active {
-    color: #e0e0e0;
-    border-color:#23bf48;
-}
+
 
 .nav-link {
     color: #1f4b2e;
 }
 
-.dark-mode .nav-link {
-    color:#23bf48;
-}
+
 
 .nav-link:hover {
     color:#14532d;
@@ -233,24 +180,7 @@ table {
     border-color: #1f4b2e;
 }
 
-.dark-mode .leaderboard thead {
-    border-bottom: 1px solid;
-    border-color: #FFFFFF;
-}
 
-.dark-mode .leaderboard a {
-    color: #FFFFFF;
-}
-
-.dark-mode .leaderboard tr:nth-child(even) {
-    border-top: 2px solid;
-    border-bottom: 2px solid;
-    border-color: #1f4b2e;
-}
-
-.dark-mode .rank-card {
-    background-color: #121212;
-}
 
 .entry-pfp {
     display: inline-block;
@@ -298,4 +228,20 @@ table {
 
 .badge-container:hover .badge-tooltip {
     display: block;
+}
+/* Django Message Boxes */
+.django-message {
+    border-radius: 10px;
+    padding: 1em;
+    color: white;
+}
+
+.error.django-message {
+    background-color: #844;
+    border: 5px #522 solid;
+}
+
+.success.django-message {
+    background-color: #484;
+    border: 5px #252 solid;
 }

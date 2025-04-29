@@ -4,33 +4,25 @@
 
 {% block content %}
 <h2 class="mb-4">Settings</h2>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }} django-message w-50"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
 
 <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="darkModeToggle">
-  <label class="form-check-label" for="darkModeToggle">Toggle Dark Mode</label>
+   <form method="POST">
+       {% csrf_token %}
+       <p>
+           <label for="id_use_dark_mode">Dark Mode Toggle</label>
+           <input type="checkbox" name="use_dark_mode" class="form-check-input" id="id_use_dark_mode" {% if form.use_dark_mode.value %}checked{% endif %}>
+       </p>
+
+       <button class="btn btn-primary" type="submit">Save Settings</button>
+   </form>
+
 </div>
-
-<script>
-// Dark mode toggle script
-document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    // Check if dark mode was already enabled
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        toggle.checked = true;
-    }
-
-    toggle.addEventListener('change', function() {
-        if (this.checked) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    });
-});
-</script>
 {% endblock %}
