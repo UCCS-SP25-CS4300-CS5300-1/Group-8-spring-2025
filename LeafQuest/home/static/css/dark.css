@@ -86,3 +86,18 @@ footer p {
 .image-card {
     background-color: #222;
 }
+
+.card {
+    background-color: #1f4b2e;
+}
+
+.btn-outline-dark {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: white;
+}
+
+.modal-content {
+    background-color: #343434
+}
