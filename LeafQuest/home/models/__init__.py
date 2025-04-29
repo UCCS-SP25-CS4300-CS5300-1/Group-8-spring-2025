@@ -9,3 +9,4 @@ from .badge_model import Badge
 from .captured_image_model import CapturedImage
 from .leaderboard_models import Leaderboard
 from .map_model import MapPin
+from .preferences_models import ClientPreferences
