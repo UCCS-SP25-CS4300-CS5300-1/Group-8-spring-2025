@@ -37,8 +37,13 @@ jobs:
         id: pylint
         run: |
           python -m pylint --recursive=y --output=pylint-report.txt LeafQuest/
+
+      - name: Always post-process report
+        if: always()
+        run: |
           sed -i '1i ```' pylint-report.txt
           sed -i '$a ```' pylint-report.txt
+          cat pylint-report.txt
 
       - name: Upload linter results
         if: always()
