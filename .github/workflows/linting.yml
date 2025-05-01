@@ -43,7 +43,7 @@ jobs:
         run: |
           sed -i '1i ```' pylint-report.txt
           sed -i '$a ```' pylint-report.txt
-          cat pylint-report
+          cat pylint-report.txt
 
       - name: Upload linter results
         if: always()
