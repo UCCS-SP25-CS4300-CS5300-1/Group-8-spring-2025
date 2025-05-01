@@ -11,10 +11,10 @@ client = OpenAI(
 )
 chat_completion = client.chat.completions.create(
     messages=[
-        {"role": "system","content": "You are an expert software engineer performing a code review on a Django project. Provide concise, actionable feedback."},
+        {"role": "system", "content": "You are an expert software engineer performing a code review on a Django project. Provide concise, actionable feedback."},
         {"role": "user", "content": f"Provide concise, actionable feedback in Markdown format, paying special attention to Django convention, security, and code efficiency, and in each case mentioning the file name and line number for the suggestion. Here's the pull request diff:\n{diff}"}
     ],
-    model="o3-mini"
+    model="4o"
 )
 
 feedback = chat_completion.choices[0].message.content
