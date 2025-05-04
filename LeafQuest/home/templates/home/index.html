@@ -32,7 +32,7 @@
 
     <h4>Badges <a class="btn btn-success" href="{% url 'badges' %}" role="button">See More</a></h4>
     <div class="container-fluid border border-dark mb-2" style="height:100px;">
-
+        {% include 'badges/user-badges.html' %}
     </div>
 
     <h4>Social <a class="btn btn-success" href="{% url 'social' %}" role="button">See More</a></h4>
