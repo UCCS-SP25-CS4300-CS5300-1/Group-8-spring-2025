@@ -1,0 +1,7 @@
+************* Module home.views.home
+LeafQuest/home/views/home.py:17:79: C0303: Trailing whitespace (trailing-whitespace)
+LeafQuest/home/views/home.py:21:48: C0303: Trailing whitespace (trailing-whitespace)
+
+------------------------------------------------------------------
+Your code has been rated at 9.97/10 (previous run: 9.97/10, +0.00)
+
