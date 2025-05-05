@@ -5,7 +5,7 @@ from django.db.models.signals import post_save, post_migrate
 from django.dispatch import receiver
 
 from .models.profile_model import Profile
-from .models.captured_image_model import CapturedImage
+from .models.captures import CapturedImage
 from .models.leaderboard_models import Leaderboard
 from .models.badge_model import Badge
 

@@ -8,7 +8,7 @@ import piexif
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import IdentRequest
+from .models import IdentRequest, StatusChoices
 
 
 def _strip_gps_and_return(instance):
@@ -62,7 +62,7 @@ def identify(sender, instance, created, **kwargs):
         _strip_gps_and_return(instance)
 
     # send identity request
-    if instance.image and instance.req_status == IdentRequest.StatusChoices.CREATED:
+    if instance.image and instance.req_status == StatusChoices.CREATED:
         file = instance.image.file
         files = {
             'image': (instance.image.name, file),
@@ -84,15 +84,15 @@ def identify(sender, instance, created, **kwargs):
             if response.status_code == 200:
                 res_data = response.json()
                 if res_data['status'] == 'received':
-                    instance.req_status = IdentRequest.StatusChoices.PENDING
+                    instance.req_status = StatusChoices.PENDING
                     instance.save()
                 elif res_data['status'] == 'error':
-                    instance.req_status = IdentRequest.StatusChoices.FAILED
+                    instance.req_status = StatusChoices.FAILED
                     instance.status_reason = res_data['message']
                     instance.save()
 
         # pylint: disable-next=broad-exception-caught
         except Exception as _e:
-            instance.req_status = IdentRequest.StatusChoices.FAILED
+            instance.req_status = StatusChoices.FAILED
             instance.status_reason = "Identity Server Unreachable"
             instance.save()
