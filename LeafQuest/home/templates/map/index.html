@@ -10,6 +10,7 @@
 <div id="map" style="height: 500px; width: 100%;"></div>
 
 <script>
+  const markers = [];
   function initMap() {
     const center = { lat: 38.859055, lng: -104.813499 };
     map = new google.maps.Map(document.getElementById("map"), {
@@ -31,6 +32,7 @@
         captures.forEach(capture => addCaptureMarker(capture));
       });
 
+    // for some reason addEventListener does not work here??????
     map.addListener("click", function (e) {
       const name = prompt("Enter a name for this pin:");
       if (!name) return;
@@ -61,7 +63,7 @@
       content: `<strong>${pin.name}</strong>`
     });
 
-    marker.addListener("click", () => {
+    marker.addEventListener("click", () => {
       infoWindow.open(map, marker);
     });
 
@@ -78,10 +80,18 @@
     });
 
     const infoWindow = new google.maps.InfoWindow({
-      content: `<strong>${capture.name}</strong> (Captured)`
+      content: `
+<div class="map-pin-capture">
+<p>
+<strong>${capture.name}</strong><br>
+Captured by ${capture.user}, <a href='/plantdex/${capture.id}'>more info</a>
+</p>
+<img src=${capture.image_url} alt="capture">
+</div>`
     });
 
-    marker.addListener("click", () => {
+    // for some reason addEventListener does not work here??????
+    marker.addListener('click', () => {
       infoWindow.open(map, marker);
     });
 

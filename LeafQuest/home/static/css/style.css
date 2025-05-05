@@ -63,8 +63,6 @@ body, .navbar-custom, .sidebar-custom, footer, .list-group-item {
 }
 
 
-
-
 .image-card {
     position: relative;
     overflow: hidden;
@@ -145,11 +143,9 @@ h2 > sup {
 }
 
 
-
 .nav-link {
     color: #1f4b2e;
 }
-
 
 
 .nav-link:hover {
@@ -178,7 +174,6 @@ table {
     border-bottom: 2px solid;
     border-color: #1f4b2e;
 }
-
 
 
 .entry-pfp {
@@ -228,6 +223,7 @@ table {
 .badge-container:hover .badge-tooltip {
     display: block;
 }
+
 /* Django Message Boxes */
 .django-message {
     border-radius: 10px;
@@ -244,6 +240,7 @@ table {
     background-color: #484;
     border: 5px #252 solid;
 }
+
 /* Capture Button */
 .capture-button {
     background-color: #23bf48;
@@ -274,4 +271,13 @@ table {
     height: 160px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.map-pin-capture {
+    display: flex;
+    flex-direction: column;
+}
+
+.map-pin-capture > img {
+    max-height: 15em;
 }

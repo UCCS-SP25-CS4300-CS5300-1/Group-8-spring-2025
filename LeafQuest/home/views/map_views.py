@@ -10,8 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 
-from identify_api.models import IdentRequest
-from ..models import MapPin
+from identify_api.models import IdentRequest, StatusChoices
+from ..models import MapPin, CapturedImage
 
 
 @login_required
@@ -66,7 +66,7 @@ def delete_pin(request, pin_id):
 @login_required
 def get_capture_pins(request):
     captures = IdentRequest.objects.filter(
-        req_status=IdentRequest.StatusChoices.RETURNED,
+        req_status=StatusChoices.RETURNED,
         gps_latitude__isnull=False,
         gps_longitude__isnull=False,
         result__isnull=False,
@@ -78,6 +78,10 @@ def get_capture_pins(request):
         lon = capture.gps_longitude
         name = capture.result
 
+        capture_objects = CapturedImage.objects.filter(ident_request=capture)
+        if len(capture_objects) < 0:
+            continue  # skip this ident request if it's a dangling capture with no CapturedImage associated
+
         if capture.gps_lat_north is False:
             lat = -lat
         if capture.gps_lon_west is True:
@@ -86,7 +90,10 @@ def get_capture_pins(request):
         pin_list.append({
             'name': name,
             'lat': lat,
-            'lng': lon
+            'lng': lon,
+            'image_url': capture.image.url,
+            'user': capture_objects[0].user.username,
+            'id': capture_objects[0].id,
         })
 
     return JsonResponse(pin_list, safe=False)
