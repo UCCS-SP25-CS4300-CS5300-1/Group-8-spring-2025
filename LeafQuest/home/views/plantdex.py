@@ -86,7 +86,10 @@ def plantdex_detail_view(request, pk):
     if ident_species is None or ident_species == "":
         context['species'] = "Unknown"
         if capture.ident_request.req_status == StatusChoices.FAILED:
-            context['req_status'] = "failed"
+            if capture.ident_request.status_reason == "No Plant Identified":
+                context['req_status'] = "bad plant"
+            else:
+                context['req_status'] = "failed"
         elif capture.ident_request.req_status == StatusChoices.PENDING:
             context['req_status'] = "pending"
         elif capture.ident_request.req_status == StatusChoices.CREATED:

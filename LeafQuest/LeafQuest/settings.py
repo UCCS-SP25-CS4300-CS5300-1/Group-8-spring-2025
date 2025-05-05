@@ -164,3 +164,4 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', False)
+CONFIDENCE_THRESHOLD = os.environ.get('CONFIDENCE_THRESHOLD', 0.7)

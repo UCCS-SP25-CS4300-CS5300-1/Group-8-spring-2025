@@ -7,6 +7,7 @@ import uuid
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 from .models import IdentRequest, StatusChoices
 
@@ -48,7 +49,7 @@ def return_ident(request):
 
             prediction = response.get('prediction')
             confidence = float(response.get('confidence'))
-            if confidence >= float(os.environ.get('CONFIDENCE_THRESHOLD', 0)):
+            if confidence >= float(settings.CONFIDENCE_THRESHOLD):
                 request.result = prediction
                 request.confidence = confidence
                 request.req_status = StatusChoices.RETURNED

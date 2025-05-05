@@ -14,6 +14,8 @@
         <div class="container">
             {% if req_status == "failed" %}
                 <p>We had trouble processing this image <br> <a class="btn btn-primary" href="#">Try Again</a></p>
+            {% elif req_status "bad plant" %}
+                <p>We weren't able to identify a plant in this image, try taking a more clear picture.</p>
             {% elif req_status == "pending" %}
                 <p>We're still working on identifying this plant, check back later!</p>
             {% elif req_status == "created" %}
