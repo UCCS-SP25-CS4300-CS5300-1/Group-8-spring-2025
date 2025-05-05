@@ -26,7 +26,7 @@ def update_leaderboard_entry(sender, instance, created, **kwargs):
         25: "Intermediate",
         50: "Expert",
         100: "Master",
-        200: "Legendary"
+        200: "Legend"
     }
 
     for count, badge_name in unlock_milestones.items():
@@ -57,7 +57,7 @@ def create_default_badges(sender, **kwargs):
         {"name": "Intermediate", "description": "Captured 25 unique plants!", "image": "badges/intermediate.png"},
         {"name": "Expert", "description": "Captured 50 unique plants!", "image": "badges/expert.png"},
         {"name": "Master", "description": "Captured 100 unique plants!", "image": "badges/master.png"},
-        {"name": "Legendary", "description": "Captured 200 unique plants!", "image": "badges/legendary.png"},
+        {"name": "Legend", "description": "Captured 200 unique plants!", "image": "badges/legend.png"},
     ]
 
     for badge_data in default_badges:

@@ -25,19 +25,32 @@
 
     {% endif %}
 
+    <div class="mb-4 px-2">
+        <a href="{% url 'capture' %}" class="btn btn-lg capture-button w-100">
+            <span class="material-symbols-outlined align-middle">photo_camera</span>
+            <strong class="align-middle">Capture</strong>
+        </a>
+    </div>    
+
     <h4>PlantDex <a class="btn btn-success" href="{% url 'plantdex' %}" role="button">See More</a></h4>
     <div class="container-fluid border border-dark mb-2" style="height:17rem; overflow-y: scroll;">
         {% include 'plantdex/recent-discoveries.html' %}
     </div>
 
     <h4>Badges <a class="btn btn-success" href="{% url 'badges' %}" role="button">See More</a></h4>
-    <div class="container-fluid border border-dark mb-2" style="height:100px;">
-
-    </div>
+    <div class="container-fluid border border-dark mb-2 d-flex align-items-center px-3" style="height:100px; overflow-x: auto;">
+        {% for badge in unlocked_badges %}
+            <img src="{{ badge.image.url }}" alt="{{ badge.name }}" title="{{ badge.name }}" style="height:60px; margin-right:10px;">
+        {% empty %}
+            <p class="text-muted my-auto">You haven't unlocked any badges yet.</p>
+        {% endfor %}
+    </div>    
 
     <h4>Social <a class="btn btn-success" href="{% url 'social' %}" role="button">See More</a></h4>
-    <div class="container-fluid border border-dark mb-2" style="height:17rem; overflow-y: scroll;">
-        {% include 'social/explore.html' %}
+    <div class="container-fluid border border-dark mb-5 p-2">
+        <div class="social-grid">
+            {% include 'social/explore.html' %}
+        </div>
     </div>
 
 {% endblock %}
