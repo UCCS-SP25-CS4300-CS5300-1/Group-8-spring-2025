@@ -2,7 +2,6 @@
 Views for identify_api
 """
 import json
-import os
 import uuid
 
 from django.http import JsonResponse

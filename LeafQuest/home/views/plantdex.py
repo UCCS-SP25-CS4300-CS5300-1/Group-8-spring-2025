@@ -9,11 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from openai import OpenAI
+from identify_api.models import StatusChoices
 
 from ..models import Profile
 from ..models.captures import CapturedImage
 from ..models.captures import GPTFacts
-from identify_api.models import StatusChoices
 
 
 def _get_gpt_facts(class_name):
