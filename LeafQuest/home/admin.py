@@ -2,7 +2,7 @@
 Register Models for Admin Interface
 """
 from django.contrib import admin
-from .models import Profile, FriendList, FriendRequest, Badge, CapturedImage, Leaderboard, ClientPreferences
+from .models import Profile, FriendList, FriendRequest, Badge, CapturedImage, Leaderboard, ClientPreferences, GPTFacts
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ admin.site.register(Badge)
 admin.site.register(CapturedImage)
 admin.site.register(Leaderboard)
 admin.site.register(ClientPreferences)
+admin.site.register(GPTFacts)

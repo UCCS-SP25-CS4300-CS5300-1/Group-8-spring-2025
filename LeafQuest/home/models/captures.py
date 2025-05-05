@@ -1,5 +1,5 @@
 """
-Model for user-captured images
+Models related to captures
 Images are stored in the linked IdentRequest
 """
 from django.db import models
@@ -14,3 +14,12 @@ class CapturedImage(models.Model):
 
     def __str__(self):
         return f"Image {self.id} uploaded by {self.user.username}"
+
+
+class GPTFacts(models.Model):
+    completed = models.BooleanField(default=False)
+    species = models.CharField(max_length=120)
+    facts = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.species}"

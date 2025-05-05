@@ -1,21 +1,32 @@
 <div class="container-fluid">
-  <div class="row justify-content-start">
-    {% for capture in captures %}
-      <div class="col-sm-6 col-md-5 col-lg-3 d-flex">
-        <a href="{% url 'plantdex_detail' capture.id %}" class="card plantdex-card m-1 w-100">
-          <div class="image-card">
-            <img src="{{ capture.ident_request.image.url }}" alt="{{ capture.ident_request.result }}">
-            <div class="card-hover-info">
-              <div>
-                <p>{{ capture.ident_request.result }}<br>Captured on {{ capture.uploaded_at }}</p>
-                <p>Our confidence: %{{ capture.ident_request.confidence|floatformat:1 }}</p>
-              </div>
+    <div class="row justify-content-start">
+        {% for capture in captures %}
+            <div class="col-sm-6 col-md-5 col-lg-3 d-flex">
+                <a href="{% url 'plantdex_detail' capture.id %}" class="card plantdex-card m-1 w-100">
+                    <div class="image-card">
+                        <img src="{{ capture.ident_request.image.url }}" 
+                             alt="{% if capture.ident_request.result == None %}Unknown{% else %}
+                              capture.ident_request.result }}{% endif %}">
+                        <div class="card-hover-info">
+                            <div>
+                                <p>
+                                    {% if capture.ident_request.result == None %}
+                                        Unknown
+                                    {% else %}
+                                        {{ capture.ident_request.result }}
+                                    {% endif %}
+                                    <br>Captured on {{ capture.uploaded_at }}
+                                </p>
+                                {% if capture.ident_request.result != None %}
+                                <p>Our confidence: %{{ capture.ident_request.confidence|floatformat:1 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
-        </a>
-      </div>
-    {% empty %}
-        <p class="text-muted">No plants saved yet. Go out and capture some!</p>
-    {% endfor %}
-  </div>
+            {% empty %}
+            <p class="text-muted">No plants saved yet. Go out and capture some!</p>
+        {% endfor %}
+    </div>
 </div>

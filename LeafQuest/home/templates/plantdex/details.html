@@ -1,20 +1,33 @@
 {% extends "base.html" %}
+{% load markdownify %}
 
-{% block title %}{{ capture.ident_request.result }} captured by {{ user }} - LeafQuest{% endblock %}
+{% block title %}{{ species }} captured by {{ user }} - LeafQuest{% endblock %}
 
 {% block content %}
-    <h2 class="mb-4">{{ capture.ident_request.result }}<br>
+    <h2 class="mb-4">{{ species }}<br>
         <sup>Captured by <a href="{% url 'profile_view' profile.id %}">{{ capture.user }}</a></sup>
     </h2>
     <div class="container d-flex flex-row">
         <div class="capture-image-detail">
-            <img src="{{ capture.ident_request.image.url }}" class="object-fit-scale" alt="{{ capture.ident_request.result }}">
+            <img src="{{ capture.ident_request.image.url }}" class="object-fit-scale" alt="{{ species }}">
         </div>
         <div class="container">
-            <p>We are %{{ capture.ident_request.confidence|floatformat:1 }} sure that this is a picture of {{ capture.ident_request.result }}</p>
-            <p>Captured on {{ capture.uploaded_at }}</p>
+            {% if req_status == "failed" %}
+                <p>We had trouble processing this image <br> <a class="btn btn-primary" href="#">Try Again</a></p>
+            {% elif req_status "bad plant" %}
+                <p>We weren't able to identify a plant in this image, try taking a more clear picture.</p>
+            {% elif req_status == "pending" %}
+                <p>We're still working on identifying this plant, check back later!</p>
+            {% elif req_status == "created" %}
+                <p>We haven't started identifying this image yet, <a class="btn btn-primary" href="#">Start Now?</a></p>
+            {% else %}
+                <p>We are %{{ capture.ident_request.confidence|floatformat:1 }} sure that this is a picture of {{ species }}</p>
+                <p>Captured on {{ capture.uploaded_at }}</p>
+            {% endif %}
+            
             <div id="ai-summary">
-                <p>AI summary coming soon</p>
+                <h3>Facts About This Plant</h3>
+                <p>{{ facts|markdownify }}</p>
             </div>
         </div>
     </div>

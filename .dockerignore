@@ -21,4 +21,11 @@ feedback.md
 # Files related to deployed server
 data/
 
+# don't copy identify server
 identify/
+
+# dont' copy workflow files
+.github/
+ai-code-review.py
+pylintrc.toml
+README.md

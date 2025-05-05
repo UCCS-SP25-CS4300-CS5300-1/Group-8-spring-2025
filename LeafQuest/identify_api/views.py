@@ -2,13 +2,13 @@
 Views for identify_api
 """
 import json
-import os
 import uuid
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
-from .models import IdentRequest
+from .models import IdentRequest, StatusChoices
 
 
 @csrf_exempt
@@ -48,12 +48,12 @@ def return_ident(request):
 
             prediction = response.get('prediction')
             confidence = float(response.get('confidence'))
-            if confidence >= float(os.environ.get('CONFIDENCE_THRESHOLD', 0)):
+            if confidence >= float(settings.CONFIDENCE_THRESHOLD):
                 request.result = prediction
                 request.confidence = confidence
-                request.req_status = IdentRequest.StatusChoices.RETURNED
+                request.req_status = StatusChoices.RETURNED
             else:
-                request.req_status = IdentRequest.StatusChoices.FAILED
+                request.req_status = StatusChoices.FAILED
                 request.status_reason = "No Plant Identified"
 
             request.save()
