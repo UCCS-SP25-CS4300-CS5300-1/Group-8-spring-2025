@@ -3,20 +3,20 @@
     This file is loaded conditionally in base.html
 */
 body {
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
 }
 
 footer {
-    background-color: #14532d;
+    background-color: #222;
 }
 
 .navbar-custom {
-    background-color: #14532d;
+    background-color: #207d47;
 }
 
 .sidebar-custom {
-    background-color: #1f4b2e;
+    background-color: #296b42;
 }
 
 .profile-btn {
@@ -39,20 +39,24 @@ footer p {
 }
 
 .list-group-item {
-    background-color: #1c1c1c;
-    color: #ccc;
+    background-color: #2b2b2b;
+    color: #f0f0f0;
 }
 
 .list-group-item a {
-    color: #ccc;
+    color: #f0f0f0;
 }
 
 .list-group-item a:hover {
-    color: #fff;
+    color: #ffffff;
 }
 
 .profile-bg {
-    background-color:#1f4b2e;
+    background-color: #296b42;
+}
+
+.badge-tooltip {
+    background-color: #2a2a2a;
 }
 
 .container .nav .active {
@@ -80,7 +84,7 @@ footer p {
 }
 
 .rank-card {
-    background-color: #121212;
+    background-color: #1e1e1e;
 }
 
 .image-card {
