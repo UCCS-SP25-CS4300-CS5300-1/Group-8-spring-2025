@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'markdownify',
     'home',
     'identify_api'
 ]
@@ -88,6 +89,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'home.context_processors.client_preferences',
             ],
         },
     },
@@ -160,3 +162,6 @@ STORAGES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', False)
+CONFIDENCE_THRESHOLD = os.environ.get('CONFIDENCE_THRESHOLD', 0.7)

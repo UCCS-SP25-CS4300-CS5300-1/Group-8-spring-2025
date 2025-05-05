@@ -11,6 +11,7 @@ services:
       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - IDENT_SERVER_HOST=http://leafquest-identify:8080
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - ${PERSIST_DATA_LOC}/db.sqlite3:/app/db.sqlite3
       - ${PERSIST_DATA_LOC}/media:/app/home/media

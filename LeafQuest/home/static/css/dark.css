@@ -1,0 +1,113 @@
+/*
+    Color overrides for dark mode
+    This file is loaded conditionally in base.html
+*/
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+footer {
+    background-color: #14532d;
+}
+
+.navbar-custom {
+    background-color: #14532d;
+}
+
+.sidebar-custom {
+    background-color: #1f4b2e;
+}
+
+.profile-btn {
+    background-color: #333;
+    color: #ccc;
+    border-color: #555;
+}
+
+.profile-btn:hover {
+    background-color: #555;
+    color: white;
+}
+
+footer {
+    background-color: #1c1c1c;
+}
+
+footer p {
+    color: #888;
+}
+
+.list-group-item {
+    background-color: #1c1c1c;
+    color: #ccc;
+}
+
+.list-group-item a {
+    color: #ccc;
+}
+
+.list-group-item a:hover {
+    color: #fff;
+}
+
+.profile-bg {
+    background-color:#1f4b2e;
+}
+
+.container .nav .active {
+    color: #e0e0e0;
+    border-color:#23bf48;
+}
+
+.nav-link {
+    color:#23bf48;
+}
+
+.leaderboard thead {
+    border-bottom: 1px solid;
+    border-color: #FFFFFF;
+}
+
+.leaderboard a {
+    color: #FFFFFF;
+}
+
+.leaderboard tr:nth-child(even) {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #1f4b2e;
+}
+
+.rank-card {
+    background-color: #121212;
+}
+
+.image-card {
+    background-color: #222;
+}
+
+.card {
+    background-color: #1f4b2e;
+}
+
+.btn-outline-dark {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: white;
+}
+
+.modal-content {
+    background-color: #343434
+}
+
+.capture-button {
+    background-color: #207d47;
+    color: #f0f0f0;
+}
+
+.capture-button:hover {
+    background-color: #1b5e32;
+    color: #ffffff;
+}

@@ -87,11 +87,16 @@ class ViewTests(TestCase):
         response = self.client.get(reverse('leaderboard_view'))
         self.assertEqual(response.status_code, 200)
 
-    def test_settings_view(self):
+    def test_settings_get(self):
         request = self.factory.get('/settings/')
         request.user = self.user
         response = settings_view(request)
         self.assertEqual(response.status_code, 200)
+
+    def test_settings_post(self):
+        response = self.client.post('/settings/', data={'use_dark_mode': 'true'})
+        self.assertEqual(response.status_code, 200)
+        # Cannot test failed form validation at this time
 
     def test_register_view(self):
         self.client.get(reverse('logout'))  # log out first
