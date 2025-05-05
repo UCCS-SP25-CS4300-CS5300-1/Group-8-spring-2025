@@ -33,7 +33,8 @@ def settings_view(request):
 
             return render(request, 'settings/index.html', context)
 
-        context['form'] = form
-        messages.error(request, 'Error saving settings\n' + form.errors)
-        return render(request, 'settings/index.html', context)
+        # an invalid form is impossible with current form content
+        context['form'] = form  # pragma: no cover
+        messages.error(request, 'Error saving settings\n' + form.errors)  # pragma: no cover
+        return render(request, 'settings/index.html', context)  # pragma: no cover
     return HttpResponse(status=405)

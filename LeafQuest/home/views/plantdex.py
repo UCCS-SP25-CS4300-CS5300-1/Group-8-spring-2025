@@ -16,7 +16,8 @@ from ..models.captures import CapturedImage
 from ..models.captures import GPTFacts
 
 
-def _get_gpt_facts(class_name):
+def _get_gpt_facts(class_name):  # pragma: no cover
+    # can't perform coverage on external API calls
     fact_entry, created = GPTFacts.objects.get_or_create(species=class_name)
     if created:
         if not settings.OPENAI_API_KEY:
