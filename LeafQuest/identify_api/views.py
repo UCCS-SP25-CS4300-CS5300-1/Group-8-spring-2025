@@ -8,7 +8,7 @@ import uuid
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import IdentRequest
+from .models import IdentRequest, StatusChoices
 
 
 @csrf_exempt
@@ -51,9 +51,9 @@ def return_ident(request):
             if confidence >= float(os.environ.get('CONFIDENCE_THRESHOLD', 0)):
                 request.result = prediction
                 request.confidence = confidence
-                request.req_status = IdentRequest.StatusChoices.RETURNED
+                request.req_status = StatusChoices.RETURNED
             else:
-                request.req_status = IdentRequest.StatusChoices.FAILED
+                request.req_status = StatusChoices.FAILED
                 request.status_reason = "No Plant Identified"
 
             request.save()
