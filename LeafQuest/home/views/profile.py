@@ -8,12 +8,14 @@ from ..models.leaderboard_models import Leaderboard
 from ..models.profile_model import Profile
 from ..models.friend_models import FriendList, FriendRequest
 from ..models.captures import CapturedImage
+from ..models.badge_model import Badge
 
 
 @login_required
 def profile_view(request, profile_id):
     profile = Profile.objects.get(pk=profile_id)
     user_fl = FriendList.objects.get(profile=request.user.profile)
+    unlocked_badges = Badge.objects.filter(users=request.user).order_by('name')
     is_friend = False
     sent_req = False
 
@@ -33,6 +35,7 @@ def profile_view(request, profile_id):
     # Get captured images
     captures = CapturedImage.objects.filter(user=profile.user).order_by('-uploaded_at')
     context['captures'] = captures
+    context['unlocked_badges'] = unlocked_badges
 
     # Get the leaderboard entry for this user
     leaderboard_entry = None
