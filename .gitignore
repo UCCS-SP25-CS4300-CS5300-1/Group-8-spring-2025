@@ -9,7 +9,7 @@ __pycache__
 LeafQuest/staticfiles
 
 # Files uploaded by users
-LeafQuest/home/media
+LeafQuest/home/media/captures
 
 # Don't track pycharm files
 .idea
