@@ -8,7 +8,7 @@
             <div class="capture">
                 <img src="/media/{{ capture.user.profile.pfp }}" alt="Profile Picture" class="profile-btn capture-pfp-overlay">
                 <div class="image-card">
-                    <img src="{{ capture.ident_request.image.url }}" alt="{{ capture.ident_request.result }}">
+                    <img src="{{ capture.ident_request.image.url }}" alt="{{ capture.ident_request.result }}" loading="lazy">
                     <div class="card-hover-info">
                     <div>
                         <p><strong>{{ capture.user }}</strong> captured:</p>
