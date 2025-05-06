@@ -77,7 +77,11 @@
                 
                     <h4>Badges</h4>
                     <div class="container-fluid border border-dark mb-2" style="height:100px;">
-                
+                        {% for badge in unlocked_badges %}
+                            <img src="{{ badge.image.url }}" alt="{{ badge.name }}" title="{{ badge.name }}" style="height:60px; margin-right:10px;">
+                        {% empty %}
+                            <p class="text-muted my-auto">You haven't unlocked any badges yet.</p>
+                        {% endfor %}
                     </div>
 
                 {% endif %}
