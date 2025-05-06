@@ -10,6 +10,7 @@ LeafQuest/staticfiles
 
 # Files uploaded by users
 LeafQuest/home/media/captures
+LeafQuest/home/media/profile
 
 # Don't track pycharm files
 .idea
