@@ -48,13 +48,17 @@ def return_ident(request):
 
             prediction = response.get('prediction')
             confidence = float(response.get('confidence'))
-            if confidence >= float(settings.CONFIDENCE_THRESHOLD):
-                request.result = prediction
-                request.confidence = confidence
-                request.req_status = StatusChoices.RETURNED
-            else:
+            if prediction == 'negative' or prediction == 'diner_outdoor':
                 request.req_status = StatusChoices.FAILED
                 request.status_reason = "No Plant Identified"
+            else: 
+                if confidence >= float(settings.CONFIDENCE_THRESHOLD):
+                    request.result = prediction
+                    request.confidence = confidence
+                    request.req_status = StatusChoices.RETURNED
+                else:
+                    request.req_status = StatusChoices.FAILED
+                    request.status_reason = "No Plant Identified"
 
             request.save()
             return JsonResponse({'status': 'ok'})
