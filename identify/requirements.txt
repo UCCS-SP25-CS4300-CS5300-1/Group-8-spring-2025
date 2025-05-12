@@ -3,7 +3,7 @@ astunparse==1.6.3
 bottle==0.13.2
 certifi==2025.1.31
 cffi==1.17.1
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 flatbuffers==25.2.10
 gast==0.6.0
 gevent==24.11.1
